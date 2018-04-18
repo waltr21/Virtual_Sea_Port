@@ -3,8 +3,6 @@ import * as THREE from 'three';
 // const OrbitControls = orbit(THREE);
 import TrackballControls from 'three-trackballcontrols';
 import Wheel from './models/Wheel';
-import Spinner from './models/Spinner';
-
 
 
 export default class App {
@@ -19,6 +17,7 @@ export default class App {
         // const orbiter = new OrbitControls(this.camera);
         // orbiter.enableZoom = false;
         // orbiter.update();
+
         this.tracker = new TrackballControls(this.camera);
         this.tracker.rotateSpeed = 2.0;
         this.tracker.noZoom = false;
@@ -27,12 +26,6 @@ export default class App {
         const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
         lightOne.position.set (10, 40, 100);
         this.scene.add (lightOne);
-
-        this.temp = new Spinner();
-        for (var k = 0; k < this.temp.length; k++){
-            this.scene.add(this.temp[k]);
-        }
-
 
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
