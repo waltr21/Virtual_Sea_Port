@@ -3,6 +3,7 @@ import * as THREE from 'three';
 // const OrbitControls = orbit(THREE);
 import TrackballControls from 'three-trackballcontrols';
 import Floor from './models/Floor.js';
+import PortFloor from './models/PortFloor';
 
 
 export default class App {
@@ -29,6 +30,12 @@ export default class App {
 
         this.water = new Floor();
         this.scene.add(this.water);
+
+        this.port = new PortFloor();
+        this.port.translateX(100);
+        this.port.translateY(10);
+        this.scene.add(this.port);
+
 
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
