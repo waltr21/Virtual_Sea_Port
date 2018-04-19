@@ -1,0 +1,109 @@
+{
+    "animations": [{
+        "fps": 29,
+        "name": "default",
+        "tracks": []
+    }],
+    "textures": [{
+        "minFilter": 1008,
+        "repeat": [1,1],
+        "mapping": 300,
+        "magFilter": 1006,
+        "wrap": [1000,1000],
+        "image": "37F96233-6C33-3D20-84CE-059206260082",
+        "name": "MetalContainers0110_240_jpg",
+        "uuid": "9EC7E81B-6D91-3353-9482-9FE686322C35",
+        "anisotropy": 1
+    }],
+    "materials": [{
+        "map": "9EC7E81B-6D91-3353-9482-9FE686322C35",
+        "ambient": 11579568,
+        "vertexColors": false,
+        "depthTest": true,
+        "shininess": 50,
+        "name": "Physical",
+        "type": "MeshPhongMaterial",
+        "blending": "NormalBlending",
+        "emissive": 0,
+        "specular": 0,
+        "uuid": "BAA12A36-7C84-3F45-BBC9-C98F423700AF",
+        "color": 11579568,
+        "depthWrite": true
+    }],
+    "object": {
+        "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+        "children": [{
+            "name": "Box",
+            "uuid": "DDA9AE26-14F9-3E6A-9BDD-AF02F6D2F286",
+            "matrix": [-3,0,0,0,0,-1,-0,0,0,-0,1,0,0,0.5,0,1],
+            "visible": true,
+            "type": "Mesh",
+            "material": "BAA12A36-7C84-3F45-BBC9-C98F423700AF",
+            "castShadow": true,
+            "receiveShadow": true,
+            "geometry": "15641190-4052-3871-BF5E-F046F6B1B496"
+        }],
+        "uuid": "0407D478-874A-4DC4-A672-67A6BD0FFD21",
+        "type": "Scene"
+    },
+    "metadata": {
+        "version": 4.4,
+        "type": "Object",
+        "generator": "io_three"
+    },
+    "geometries": [{
+        "materials": [{
+            "mapDiffuseAnisotropy": 1,
+            "shading": "phong",
+            "mapDiffuse": "MetalContainers0110_240.jpg",
+            "depthTest": true,
+            "wireframe": false,
+            "colorEmissive": [0,0,0],
+            "DbgIndex": 1,
+            "blending": "NormalBlending",
+            "mapDiffuseWrap": ["RepeatWrapping","RepeatWrapping"],
+            "colorSpecular": [0.001176,0.001176,0.001176],
+            "specularCoef": 50,
+            "transparent": false,
+            "DbgColor": 15597568,
+            "mapDiffuseRepeat": [1,1],
+            "opacity": 1,
+            "visible": true,
+            "colorDiffuse": [0.690196,0.690196,0.690196],
+            "colorAmbient": [0.690196,0.690196,0.690196],
+            "DbgName": "Physical",
+            "depthWrite": true
+        }],
+        "uuid": "15641190-4052-3871-BF5E-F046F6B1B496",
+        "data": {
+            "influencesPerVertex": 2,
+            "animations": [],
+            "name": "BoxGeometry",
+            "vertices": [0.5,-0.5,0.5,0.5,0.5,0.5,0.5,-0.5,-0.5,0.5,0.5,-0.5,-0.5,0.5,0.5,-0.5,-0.5,0.5,-0.5,0.5,-0.5,-0.5,-0.5,-0.5],
+            "morphTargets": [],
+            "skinWeights": [],
+            "metadata": {
+                "morphTargets": 0,
+                "faces": 6,
+                "uvs": 1,
+                "materials": 1,
+                "bones": 0,
+                "version": 3,
+                "vertices": 8,
+                "normals": 8,
+                "generator": "io_three"
+            },
+            "faces": [43,0,2,3,1,0,0,0,1,1,0,1,2,3,43,4,6,7,5,0,2,2,3,3,4,5,6,7,43,0,1,4,5,0,0,1,2,3,0,3,4,7,43,7,6,3,2,0,3,2,1,0,6,5,2,1,43,2,0,5,7,0,0,0,3,3,1,0,7,6,43,1,3,6,4,0,1,1,2,2,3,2,5,4],
+            "bones": [],
+            "uvs": [[1,0,1,1,0,1,0,0]],
+            "normals": [0.577349,-0.577349,0.577349,0.577349,-0.577349,-0.577349,0.577349,0.577349,-0.577349,0.577349,0.577349,0.577349,-0.577349,0.577349,0.577349,-0.577349,0.577349,-0.577349,-0.577349,-0.577349,-0.577349,-0.577349,-0.577349,0.577349],
+            "skinIndices": []
+        },
+        "type": "Geometry"
+    }],
+    "images": [{
+        "url": "MetalContainers0110_240.jpg",
+        "name": "MetalContainers0110_240.jpg",
+        "uuid": "37F96233-6C33-3D20-84CE-059206260082"
+    }]
+}

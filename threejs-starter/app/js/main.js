@@ -37,6 +37,20 @@ export default class App {
         this.scene.add(this.port);
 
 
+
+        this.thingy = new THREE.Object3D;
+        this.loader = new THREE.ObjectLoader();
+
+        // Cooler container that has images all messed up.
+        //this.loader.load("/app/js/models/supply-container-threejs/supply-container.json", (obj) => {this.scene.add(obj)});
+
+
+        // Simple container
+        this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
+            (obj) => {
+                this.scene.add(obj)
+            });
+
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
         requestAnimationFrame(() => this.render());
@@ -62,4 +76,5 @@ export default class App {
         this.renderer.setSize(w, h);
         this.tracker.handleResize();
     }
+    
 }
