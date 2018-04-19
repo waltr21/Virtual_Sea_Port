@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import grass from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/images/grass.jpg";
+//import grass from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/images/grass.jpg";
 
 
 export default class portFloor {
