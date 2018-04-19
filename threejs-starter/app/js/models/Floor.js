@@ -1,10 +1,10 @@
 import {PlaneGeometry, MeshPhongMaterial, Mesh, Group, DoubleSide, TextureLoader} from 'three';
-import Water from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_Sea_Port/threejs-starter/Images/tex_Water.jpg";
+//import Water from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_Sea_Port/threejs-starter/Images/tex_Water.jpg";
 
 export default class Floor {
   constructor () {
     let floor = new Group();
-    const texture = new TextureLoader().load(Water);
+    const texture = new TextureLoader().load("Images/tex_Water.jpg");
 
     let geometry = new PlaneGeometry( 100, 100);
     let material = new MeshPhongMaterial( {map : texture, side : DoubleSide} );
