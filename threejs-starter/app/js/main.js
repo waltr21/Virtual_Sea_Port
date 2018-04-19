@@ -18,7 +18,7 @@ export default class App {
         // orbiter.enableZoom = false;
         // orbiter.update();
 
-        this.tracker = new TrackballControls(this.camera);
+        this.tracker = new TrackballControls(this.camera, c);
         this.tracker.rotateSpeed = 2.0;
         this.tracker.noZoom = false;
         this.tracker.noPan = false;
