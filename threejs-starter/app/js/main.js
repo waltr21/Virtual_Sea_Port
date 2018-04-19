@@ -2,7 +2,7 @@ import * as THREE from 'three';
 // import orbit from 'three-orbit-controls';
 // const OrbitControls = orbit(THREE);
 import TrackballControls from 'three-trackballcontrols';
-import Wheel from './models/Wheel';
+import Floor from './models/Floor.js';
 
 
 export default class App {
@@ -26,6 +26,9 @@ export default class App {
         const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
         lightOne.position.set (10, 40, 100);
         this.scene.add (lightOne);
+
+        this.water = new Floor();
+        this.scene.add(this.water);
 
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
