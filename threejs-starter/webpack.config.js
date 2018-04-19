@@ -42,11 +42,11 @@ module.exports = {
           cacheDirectory: true
         }
       },
-      // {
-      //   test: /\.glsl$/,
-      //   include: SHADER_PATH,
-      //   loader: 'webpack-glsl-loader'
-      // }
+        {                     // additional loader
+            test: /\.(jpg|png|jpeg|gif)$/,
+            include: ROOT_PATH,
+            loader: 'file-loader'
+        }
     ]
   },
   //devtool: 'source-map'
