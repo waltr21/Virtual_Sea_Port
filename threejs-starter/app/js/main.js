@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import TrackballControls from 'three-trackballcontrols';
 import Floor from './models/Floor.js';
 import PortFloor from './models/PortFloor';
+import Crane from './models/Crane';
+
 
 
 export default class App {
@@ -52,6 +54,11 @@ export default class App {
                 obj.scale.set(5, 5, 5);
                 this.scene.add(obj); 
             });
+
+        let crane = new Crane();
+        crane.translateY(10);
+
+        this.scene.add(crane);
 
 
         window.addEventListener('resize', () => this.resizeHandler());
