@@ -32,7 +32,7 @@ export default class App {
         this.scene.add(this.water);
 
         this.port = new PortFloor();
-        this.port.translateX(100);
+        this.port.translateX(200);
         this.port.translateY(10);
         this.scene.add(this.port);
 
@@ -48,6 +48,7 @@ export default class App {
         // Simple container
         this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
             (obj) => {
+                obj.scale.set(5, 5, 5);
                 this.scene.add(obj)
             });
 
