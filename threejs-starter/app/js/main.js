@@ -25,14 +25,14 @@ export default class App {
         this.tracker.noPan = false;
 
         const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
-        lightOne.position.set (10, 40, 100);
+        lightOne.position.set (-50, 40, 100);
         this.scene.add (lightOne);
 
         this.water = new Floor();
         this.scene.add(this.water);
 
         this.port = new PortFloor();
-        this.port.translateX(100);
+        this.port.translateX(200);
         this.port.translateY(10);
         this.scene.add(this.port);
 
@@ -48,6 +48,7 @@ export default class App {
         // Simple container
         this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
             (obj) => {
+                obj.scale.set(5, 5, 5);
                 this.scene.add(obj)
             });
 
