@@ -45,12 +45,14 @@ export default class App {
         //this.loader.load("/app/js/models/supply-container-threejs/supply-container.json", (obj) => {this.scene.add(obj)});
 
 
+
         // Simple container
         this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
             (obj) => {
                 obj.scale.set(5, 5, 5);
-                this.scene.add(obj)
+                this.scene.add(obj); 
             });
+
 
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
