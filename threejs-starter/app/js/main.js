@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import TrackballControls from 'three-trackballcontrols';
 import Floor from './models/Floor.js';
 import PortFloor from './models/PortFloor';
+import Skybox from "./models/Skybox";
 
 
 export default class App {
@@ -12,7 +13,7 @@ export default class App {
         // Enable antialias for smoother lines
         this.renderer = new THREE.WebGLRenderer({canvas: c, antialias: true});
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, 4/3, 0.5, 500);
+        this.camera = new THREE.PerspectiveCamera(75, 4/3, 0.5, 1000);
         this.camera.position.z = 100;
 
         // const orbiter = new OrbitControls(this.camera);
@@ -24,9 +25,12 @@ export default class App {
         this.tracker.noZoom = false;
         this.tracker.noPan = false;
 
-        const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
-        lightOne.position.set (10, 40, 100);
-        this.scene.add (lightOne);
+        // const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
+        // lightOne.position.set (10, 40, 100);
+        // this.scene.add (lightOne);
+
+        const light = new THREE.AmbientLight(0xFFFFFF, 1);
+        this.scene.add(light);
 
         this.water = new Floor();
         this.scene.add(this.water);
@@ -36,11 +40,23 @@ export default class App {
         this.port.translateY(10);
         this.scene.add(this.port);
 
+        this.sky = new Skybox();
+        this.scene.add(this.sky);
+
+
+
+        // var loader = new THREE.ObjectLoader();
+        // loader.load("/app/js/models/fishing-boat-threejs/fishing-boat.json", (obj) => {this.scene.add(obj)});
+
 
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
         requestAnimationFrame(() => this.render());
     }
+
+    // objectLoad(obj){
+    //     this.scene.add(obj);
+    // }
 
     render() {
         this.renderer.render(this.scene, this.camera);

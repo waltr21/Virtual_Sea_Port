@@ -10,7 +10,7 @@ export default class Floor {
     let material = new MeshPhongMaterial( {map : texture, side : DoubleSide} );
     let plane = new Mesh( geometry, material );
     plane.rotateX(3.1415/2);
-    floor.add( plane );
+    floor.add(plane);
 
 
     return floor;   // the constructor must return the entire group
