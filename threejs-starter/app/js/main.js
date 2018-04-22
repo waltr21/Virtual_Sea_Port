@@ -25,18 +25,15 @@ export default class App {
         this.tracker.noZoom = false;
         this.tracker.noPan = false;
 
-        // const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
-        // lightOne.position.set (10, 40, 100);
-        // this.scene.add (lightOne);
-
-        const light = new THREE.AmbientLight(0xFFFFFF, 1);
-        this.scene.add(light);
+        const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
+        lightOne.position.set (-50, 40, 100);
+        this.scene.add (lightOne);
 
         this.water = new Floor();
         this.scene.add(this.water);
 
         this.port = new PortFloor();
-        this.port.translateX(100);
+        this.port.translateX(200);
         this.port.translateY(10);
         this.scene.add(this.port);
 
@@ -48,6 +45,21 @@ export default class App {
         // var loader = new THREE.ObjectLoader();
         // loader.load("/app/js/models/fishing-boat-threejs/fishing-boat.json", (obj) => {this.scene.add(obj)});
 
+
+
+        this.thingy = new THREE.Object3D;
+        this.loader = new THREE.ObjectLoader();
+
+        // Cooler container that has images all messed up.
+        //this.loader.load("/app/js/models/supply-container-threejs/supply-container.json", (obj) => {this.scene.add(obj)});
+
+
+        // Simple container
+        this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
+            (obj) => {
+                obj.scale.set(5, 5, 5);
+                this.scene.add(obj)
+            });
 
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
@@ -78,4 +90,5 @@ export default class App {
         this.renderer.setSize(w, h);
         this.tracker.handleResize();
     }
+    
 }
