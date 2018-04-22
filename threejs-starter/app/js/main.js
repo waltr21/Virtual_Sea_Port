@@ -46,7 +46,7 @@ export default class App {
 
 
         // Simple container
-        this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
+        this.loader.load("/app/js/models/containervan-threejs/containervan.json",
             (obj) => {
                 obj.scale.set(5, 5, 5);
                 this.scene.add(obj)
