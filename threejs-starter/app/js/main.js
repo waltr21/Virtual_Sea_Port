@@ -25,8 +25,8 @@ export default class App {
         this.tracker.noZoom = false;
         this.tracker.noPan = false;
 
-        const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
-        lightOne.position.set (-50, 40, 100);
+        const lightOne = new THREE.AmbientLight (0xFFFFFF, 1.0);
+        //lightOne.position.set (-50, 40, 100);
         this.scene.add (lightOne);
 
         this.water = new Floor();
