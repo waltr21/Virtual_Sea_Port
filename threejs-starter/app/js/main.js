@@ -5,6 +5,10 @@ import TrackballControls from 'three-trackballcontrols';
 import Floor from './models/Floor.js';
 import PortFloor from './models/PortFloor';
 import Crane from './models/Crane';
+import Skybox from "./models/Skybox";
+import FishBoat from "./models/FishBoat";
+import Plane from "./models/Plane";
+import Sun from "./models/Sun";
 
 
 
@@ -17,7 +21,7 @@ export default class App {
         // Enable antialias for smoother lines
         this.renderer = new THREE.WebGLRenderer({canvas: c, antialias: true});
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, 4/3, 0.5, 500);
+        this.camera = new THREE.PerspectiveCamera(75, 4/3, 0.5, 1000);
         this.camera.position.z = 100;
 
         // const orbiter = new OrbitControls(this.camera);
@@ -29,7 +33,7 @@ export default class App {
         this.tracker.noZoom = false;
         this.tracker.noPan = false;
 
-        const lightOne = new THREE.DirectionalLight (0xFFFFFF, 1.0);
+        const lightOne = new THREE.AmbientLight (0xFFFFFF, 0.5);
         lightOne.position.set (-50, 40, 100);
         this.scene.add (lightOne);
 
@@ -41,22 +45,44 @@ export default class App {
         this.port.translateY(10);
         this.scene.add(this.port);
 
+        this.sky = new Skybox();
+        this.scene.add(this.sky);
+
+        this.sun = new Sun();
+        this.sun.matrixAutoUpdate = false;
+        let trans = new THREE.Matrix4().makeTranslation(0, 150, 550);
+        this.sun.matrix.multiply(trans);
+        this.scene.add(this.sun);
+
+
+
+
+        // var loader = new THREE.ObjectLoader();
+        // loader.load("/app/js/models/fishing-boat-threejs/fishing-boat.json", (obj) => {this.scene.add(obj)});
+
 
 
         this.thingy = new THREE.Object3D;
         this.loader = new THREE.ObjectLoader();
 
+        //this.fishBoat = null;
+
         // Cooler container that has images all messed up.
-        //this.loader.load("/app/js/models/supply-container-threejs/supply-container.json", (obj) => {this.scene.add(obj)});
+        //this.loader.load("/app/js/models/boat-threejs/boat.json", (obj) => {this.scene.add(obj)});
 
 
 
-        // Simple container
-        this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
-            (obj) => {
-                obj.scale.set(5, 5, 5);
-                this.scene.add(obj); 
-            });
+        this.fBoat = new FishBoat();
+        this.scene.add(this.fBoat);
+        this.fBoat.matrixAutoUpdate = false;
+        trans = new THREE.Matrix4().makeTranslation(-300,0,-200);
+        this.fBoat.matrix.multiply(trans);
+
+        this.plane = new Plane();
+        this.scene.add(this.plane);
+        this.plane.matrixAutoUpdate = false;
+        trans = new THREE.Matrix4().makeTranslation(100,14,60);
+        this.plane.matrix.multiply(trans);
 
         this.crane = new Crane();
         this.crane.translateY(10);
@@ -70,9 +96,21 @@ export default class App {
         requestAnimationFrame(() => this.render());
     }
 
+    // objectLoad(obj){
+    //     this.scene.add(obj);
+    // }
+
     render() {
         this.renderer.render(this.scene, this.camera);
         this.tracker.update();
+
+        let trans = new THREE.Matrix4().makeTranslation(-0.1,0,0);
+        let rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(0.1));
+        this.fBoat.matrix.multiply(trans);
+        this.fBoat.matrix.multiply(rotY);
+
+
+
         requestAnimationFrame(() => this.render());
 
         // Move crane box up and down
