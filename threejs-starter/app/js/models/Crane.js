@@ -133,14 +133,14 @@ export default class Crane extends Group {
 
     moveContainer(direction){
         if(direction == "up"){
-            this.rope2.scale.y = this.rope2.scale.y - .0625;
-            this.rope2.translateY(1.5625);
-            this.containerGroup.translateY(3.135);
+            this.rope2.scale.y = this.rope2.scale.y - .015625;
+            this.rope2.translateY(.3905);
+            this.containerGroup.translateY(.78375);
         }
         else if(direction == "down"){
-            this.rope2.scale.y = this.rope2.scale.y + .0625;
-            this.rope2.translateY(-1.5625);
-            this.containerGroup.translateY(-3.135);
+            this.rope2.scale.y = this.rope2.scale.y + .015625;
+            this.rope2.translateY(-.3905);
+            this.containerGroup.translateY(-.78375);
         }
     }
 }
