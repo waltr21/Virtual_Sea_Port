@@ -14,21 +14,22 @@ export default class PortFloor {
         const grassTex = new TextureLoader().load("Images/grass.jpg");
         grassTex.wrapS = RepeatWrapping;
         grassTex.wrapT = RepeatWrapping;
-        grassTex.repeat.x = 30;
-        grassTex.repeat.y = 30;
-        let geometry = new PlaneGeometry(300, 300);
+        grassTex.repeat.x = 50;
+        grassTex.repeat.y = 100;
+        let geometry = new PlaneGeometry(500, 1000);
         let material = new MeshPhongMaterial({map: grassTex, side: DoubleSide});
         let grass = new Mesh(geometry, material);
         grass.rotateX(THREE.Math.degToRad(90));
+        grass.translateX(100);
         this.floorGroup.add(grass);
 
         //wall
         const metalTex = new TextureLoader().load("Images/metal.jpg");
         metalTex.wrapS = RepeatWrapping;
         metalTex.wrapT = RepeatWrapping;
-        metalTex.repeat.x = 30;
+        metalTex.repeat.x = 100;
         metalTex.repeat.y = 1;
-        let geometry1 = new PlaneGeometry(300, 10);
+        let geometry1 = new PlaneGeometry(1000, 10);
         let material1 = new MeshPhongMaterial({map: metalTex, side: DoubleSide});
         let wall = new Mesh(geometry1, material1);
         wall.translateX(-150);
@@ -41,13 +42,13 @@ export default class PortFloor {
         const leftRightRoad = new TextureLoader().load("Images/road.jpg");
         leftRightRoad.wrapS = RepeatWrapping;
         leftRightRoad.wrapT = RepeatWrapping;
-        leftRightRoad.repeat.x = 6;
+        leftRightRoad.repeat.x = 11;
         leftRightRoad.repeat.y = 1;
-        let geometry2 = new PlaneGeometry(120, 20);
+        let geometry2 = new PlaneGeometry(220, 20);
         let material2 = new MeshPhongMaterial({map: leftRightRoad, side: DoubleSide});
         let road = new Mesh(geometry2, material2);
         road.translateY(.01);
-        road.translateX(90);
+        road.translateX(140);
         road.rotateX(THREE.Math.degToRad(90));
         this.floorGroup.add(road);
 
@@ -56,12 +57,12 @@ export default class PortFloor {
         upDownRoad.wrapS = RepeatWrapping;
         upDownRoad.wrapT = RepeatWrapping;
         upDownRoad.repeat.x = 1;
-        upDownRoad.repeat.y = 7;
-        let geometry3 = new PlaneGeometry(20, 140);
+        upDownRoad.repeat.y = 20;
+        let geometry3 = new PlaneGeometry(20, 440);
         let material3 = new MeshPhongMaterial({map: upDownRoad, side: DoubleSide});
         let road1 = new Mesh(geometry3, material3);
         road1.translateY(.01);
-        road1.translateZ(80);
+        road1.translateZ(230);
         road1.translateX(20);
         road1.rotateX(THREE.Math.degToRad(90));
         this.floorGroup.add(road1);
@@ -69,7 +70,7 @@ export default class PortFloor {
         //road vertical1
         let road2 = new Mesh(geometry3, material3);
         road2.translateY(.01);
-        road2.translateZ(-80);
+        road2.translateZ(-230);
         road2.translateX(20);
         road2.rotateX(THREE.Math.degToRad(90));
         this.floorGroup.add(road2);
@@ -85,6 +86,18 @@ export default class PortFloor {
         roadBlank.rotateX(THREE.Math.degToRad(90));
         roadBlank.rotateZ(THREE.Math.degToRad(90));
         this.floorGroup.add(roadBlank);
+
+        //road turn
+        const roadT = new TextureLoader().load("Images/turn.jpg");
+        let geometry8 = new PlaneGeometry(20, 20);
+        let material8 = new MeshPhongMaterial({map: roadT, side: DoubleSide});
+        let roadTurn = new Mesh(geometry8, material8);
+        roadTurn.translateY(.01);
+        roadTurn.translateZ(40);
+        roadTurn.translateX(40);
+        roadTurn.rotateX(THREE.Math.degToRad(90));
+        roadTurn.rotateZ(THREE.Math.degToRad(90));
+        this.floorGroup.add(roadTurn);
 
         //asphalt port yard
         const asphalt = new TextureLoader().load("Images/asphalt.jpg");
@@ -133,12 +146,12 @@ export default class PortFloor {
 
         //trees
         this.loader.load("/app/js/models/json-objects/tree-1-fixed-3.json", (obj) => {
-            for (var i = 0; i < 60; i++) {
+            for (var i = 0; i < 100; i++) {
                 var size = getRandomArbitrary(.3, .6);
                 var temp = obj.clone();
                 temp.scale.set(size, size, size);
-                var x = getRandomInt(40, 150);
-                var z = getRandomInt(-125, 125);
+                var x = getRandomInt(45, 220);
+                var z = getRandomInt(-425, 425);
                 var degs = getRandomInt(0, 180);
                 obj.rotateY(THREE.Math.degToRad(degs));
 
