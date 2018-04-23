@@ -1,4 +1,4 @@
-import { TextureLoader, PlaneGeometry, DoubleSide, MeshPhongMaterial, Mesh, Group, Math, RepeatWrapping} from 'three';
+import {TextureLoader, PlaneGeometry, DoubleSide, MeshPhongMaterial, Mesh, Group, RepeatWrapping} from 'three';
 import * as THREE from "three";
 //import * as THREE from 'three';
 //import grass from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/images/grass.jpg";
@@ -8,7 +8,7 @@ export default class PortFloor {
     constructor () { // number of spokes on the wheel
 
         //Creates a group for all port scenery
-        let floorGroup =  new Group();
+        this.floorGroup =  new Group();
 
         //grass
         const grassTex = new TextureLoader().load("Images/grass.jpg");
@@ -19,8 +19,8 @@ export default class PortFloor {
         let geometry = new PlaneGeometry(300, 300);
         let material = new MeshPhongMaterial({map: grassTex, side: DoubleSide});
         let grass = new Mesh(geometry, material);
-        grass.rotateX(Math.degToRad(90));
-        floorGroup.add(grass);
+        grass.rotateX(THREE.Math.degToRad(90));
+        this.floorGroup.add(grass);
 
         //wall
         const metalTex = new TextureLoader().load("Images/metal.jpg");
@@ -33,9 +33,9 @@ export default class PortFloor {
         let wall = new Mesh(geometry1, material1);
         wall.translateX(-150);
         wall.translateY(-5);
-        wall.rotateY(Math.degToRad(90));
-        wall.rotateX(Math.degToRad(180));
-        floorGroup.add(wall);
+        wall.rotateY(THREE.Math.degToRad(90));
+        wall.rotateX(THREE.Math.degToRad(180));
+        this.floorGroup.add(wall);
 
         //road horizontal
         const leftRightRoad = new TextureLoader().load("Images/road.jpg");
@@ -48,8 +48,8 @@ export default class PortFloor {
         let road = new Mesh(geometry2, material2);
         road.translateY(.01);
         road.translateX(90);
-        road.rotateX(Math.degToRad(90));
-        floorGroup.add(road);
+        road.rotateX(THREE.Math.degToRad(90));
+        this.floorGroup.add(road);
 
         //road vertical
         const upDownRoad = new TextureLoader().load("Images/roadv.jpg");
@@ -63,16 +63,16 @@ export default class PortFloor {
         road1.translateY(.01);
         road1.translateZ(80);
         road1.translateX(20);
-        road1.rotateX(Math.degToRad(90));
-        floorGroup.add(road1);
+        road1.rotateX(THREE.Math.degToRad(90));
+        this.floorGroup.add(road1);
 
         //road vertical1
         let road2 = new Mesh(geometry3, material3);
         road2.translateY(.01);
         road2.translateZ(-80);
         road2.translateX(20);
-        road2.rotateX(Math.degToRad(90));
-        floorGroup.add(road2);
+        road2.rotateX(THREE.Math.degToRad(90));
+        this.floorGroup.add(road2);
 
         //road intersection
         const roadB = new TextureLoader().load("Images/intersection3.jpg");
@@ -82,9 +82,9 @@ export default class PortFloor {
         roadBlank.translateY(.01);
         roadBlank.translateZ(0);
         roadBlank.translateX(20);
-        roadBlank.rotateX(Math.degToRad(90));
-        roadBlank.rotateZ(Math.degToRad(90));
-        floorGroup.add(roadBlank);
+        roadBlank.rotateX(THREE.Math.degToRad(90));
+        roadBlank.rotateZ(THREE.Math.degToRad(90));
+        this.floorGroup.add(roadBlank);
 
         //asphalt port yard
         const asphalt = new TextureLoader().load("Images/asphalt.jpg");
@@ -97,8 +97,8 @@ export default class PortFloor {
         let yard = new Mesh(geometry5, material5);
         yard.translateY(.01);
         yard.translateX(-75);
-        yard.rotateX(Math.degToRad(90));
-        floorGroup.add(yard);
+        yard.rotateX(THREE.Math.degToRad(90));
+        this.floorGroup.add(yard);
 
         //portyard drive
         const asphalt1 = new TextureLoader().load("Images/asphalt.jpg");
@@ -111,8 +111,8 @@ export default class PortFloor {
         let yardDrive = new Mesh(geometry6, material6);
         yardDrive.translateY(.01);
         yardDrive.translateX(5);
-        yardDrive.rotateX(Math.degToRad(90));
-        floorGroup.add(yardDrive);
+        yardDrive.rotateX(THREE.Math.degToRad(90));
+        this.floorGroup.add(yardDrive);
 
         //wood decking
         // const wood = new TextureLoader().load("Images/wood.jpg");
@@ -128,17 +128,477 @@ export default class PortFloor {
         // deck.rotateX(Math.degToRad(90));
         // floorGroup.add(deck);
 
-        //Add Containers to the group
         this.loader = new THREE.ObjectLoader();
 
-        // Simple container
-        this.loader.load("/app/js/models/containervan-threejs/containervan.json",
+
+        //trees
+        this.loader.load("/app/js/models/json-objects/tree-1-fixed-3.json", (obj) => {
+            for (var i = 0; i < 60; i++) {
+                var size = getRandomArbitrary(.3, .6);
+                var temp = obj.clone();
+                temp.scale.set(size, size, size);
+                var x = getRandomInt(40, 150);
+                var z = getRandomInt(-125, 125);
+                var degs = getRandomInt(0, 180);
+                obj.rotateY(THREE.Math.degToRad(degs));
+
+                //ignore tree if it obstructs road
+                if(z > 20 || z < -25) {
+                    temp.position.set(x, 0, z);
+                    this.floorGroup.add(temp);
+                }
+            }
+        });
+
+
+        //trucks
+        this.loader.load("/app/js/models/truck/delivery-truck.json", (obj) => {
+            var x = -13;
+            var y = 0;
+            var z = 0;
+            obj.scale.set(.03, .03, .03);
+
+            obj.rotateY(THREE.Math.degToRad(-90));
+            for (var i = 0; i < 8; i++) {
+                var temp = obj.clone();
+                z = 15 + ((i + 1) * 10);
+                temp.position.set(x, y, z);
+                this.floorGroup.add(temp);
+            }
+
+        });
+
+        this.placeContainers();
+
+
+        return this.floorGroup;   // the constructor must return the entire group
+    }
+
+
+
+    placeContainers(){
+
+        //cargo containers1
+        this.loader.load("/app/js/models/json-objects/cargo.json",
             (obj) => {
-                obj.scale.set(5, 5, 5);
-                obj.translateX(20);
-                floorGroup.add(obj)
+                var x = -80;
+                var y = 0;
+                var z = -80;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 3 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
             });
 
-        return floorGroup;   // the constructor must return the entire group
+        //cargo containers2
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -80;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 3 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers3
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -80;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 4 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers4
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -80;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 4 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers5
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -72;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 2 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers6
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -72;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 2 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers7
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -72;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 1 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers8
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -72;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 1 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers9
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -64;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 3 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers10
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -64;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 3 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers11
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -64;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 2 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers12
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -64;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 2 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers13
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -56;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 4 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers14
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -56;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 4 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers15
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -56;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 3 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers16
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -56;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 3 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers17
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -48;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 2 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers18
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -80;
+                var y = 0;
+                var z = -48;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 2 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+        //cargo containers19
+        this.loader.load("/app/js/models/json-objects/cargo.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -48;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 4 === 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    } else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
+
+        //cargo containers20
+        this.loader.load("/app/js/models/json-objects/cargo1.json",
+            (obj) => {
+                var x = -120;
+                var y = 0;
+                var z = -48;
+                obj.scale.set(.85, .77, .77);
+
+                for (var i = 0; i < 3; i++) {
+                    var temp = obj.clone();
+                    y = i * 8;
+                    if(i % 4 !== 0) {
+                        temp.position.set(x, y, z);
+                        this.floorGroup.add(temp);
+                    }else {
+                        temp.position.set(x + 20, y, z);
+                        this.floorGroup.add(temp);
+                    }
+                }
+            });
     }
+}
+
+
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
 }

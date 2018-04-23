@@ -89,6 +89,7 @@ export default class App {
         //         this.scene.add(obj)
         //     });
 
+
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
         requestAnimationFrame(() => this.render());
