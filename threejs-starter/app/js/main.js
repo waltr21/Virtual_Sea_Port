@@ -4,14 +4,19 @@ import * as THREE from 'three';
 import TrackballControls from 'three-trackballcontrols';
 import Floor from './models/Floor.js';
 import PortFloor from './models/PortFloor';
+import Crane from './models/Crane';
 import Skybox from "./models/Skybox";
 import FishBoat from "./models/FishBoat";
 import Plane from "./models/Plane";
 import Sun from "./models/Sun";
 
 
+
 export default class App {
     constructor() {
+        // Counter for moving crane
+        this.counter = 0;
+
         const c = document.getElementById('mycanvas');
         // Enable antialias for smoother lines
         this.renderer = new THREE.WebGLRenderer({canvas: c, antialias: true});
@@ -79,15 +84,11 @@ export default class App {
         trans = new THREE.Matrix4().makeTranslation(100,14,60);
         this.plane.matrix.multiply(trans);
 
+        this.crane = new Crane();
+        this.crane.translateY(10);
 
+        this.scene.add(this.crane);
 
-
-        // Simple container
-        // this.loader.load("/app/js/models/containervan-threejs/containervan.json",
-        //     (obj) => {
-        //         obj.scale.set(5, 5, 5);
-        //         this.scene.add(obj)
-        //     });
 
 
         window.addEventListener('resize', () => this.resizeHandler());
@@ -111,6 +112,24 @@ export default class App {
 
 
         requestAnimationFrame(() => this.render());
+
+        // Move crane box up and down
+        this.counter++;
+
+        if(this.counter < 30 && this.counter % 3 == 0){
+            this.crane.moveContainer("down");
+        }
+        else if(this.counter > 30 && this.counter < 60 && this.counter % 3 == 0){
+            this.crane.moveContainer("up");
+        }
+        if(this.counter == 61){
+            this.counter = 0;
+        }
+
+        // Rotate Crane
+        this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
+
+       
     }
 
     resizeHandler() {
