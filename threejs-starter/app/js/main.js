@@ -10,6 +10,9 @@ import Crane from './models/Crane';
 
 export default class App {
     constructor() {
+        // Counter for moving crane
+        this.counter = 0;
+
         const c = document.getElementById('mycanvas');
         // Enable antialias for smoother lines
         this.renderer = new THREE.WebGLRenderer({canvas: c, antialias: true});
@@ -55,10 +58,11 @@ export default class App {
                 this.scene.add(obj); 
             });
 
-        let crane = new Crane();
-        crane.translateY(10);
+        this.crane = new Crane();
+        this.crane.translateY(10);
 
-        this.scene.add(crane);
+        this.scene.add(this.crane);
+
 
 
         window.addEventListener('resize', () => this.resizeHandler());
@@ -70,6 +74,24 @@ export default class App {
         this.renderer.render(this.scene, this.camera);
         this.tracker.update();
         requestAnimationFrame(() => this.render());
+
+        // Move crane box up and down
+        this.counter++;
+
+        if(this.counter < 30 && this.counter % 3 == 0){
+            this.crane.moveContainer("down");
+        }
+        else if(this.counter > 30 && this.counter < 60 && this.counter % 3 == 0){
+            this.crane.moveContainer("up");
+        }
+        if(this.counter == 61){
+            this.counter = 0;
+        }
+
+        // Rotate Crane
+        this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
+
+       
     }
 
     resizeHandler() {

@@ -1,14 +1,28 @@
-import { TextureLoader, PlaneGeometry, CylinderGeometry, DoubleSide, MeshPhongMaterial, MeshBasicMaterial, Mesh, Group, Math, RepeatWrapping} from 'three';
+import { TextureLoader, PlaneGeometry, BoxGeometry, CylinderGeometry, DoubleSide, MeshPhongMaterial, MeshBasicMaterial, Mesh, Group, Math, RepeatWrapping} from 'three';
 import * as THREE from "three";
 
-export default class Crane {
+export default class Crane extends Group {
     constructor () { 
+        super();
+        this.craneGroup =  new Group();
+        this.moveableCraneGroup = new Group();
+        this.containerGroup = new Group();
 
-        let craneGroup =  new Group();
-
-        let baseGeo = new CylinderGeometry(4, 4, 15, 4);
+        let baseGeo = new CylinderGeometry(4, 4, 30, 4);
         let legGeo = new CylinderGeometry(3, 3, 20, 4);
-        let crossGeo = new CylinderGeometry(5, 5, 25, 4);
+        let crossGeo = new CylinderGeometry(7, 7, 25, 4);
+        let shaftGeo = new CylinderGeometry(4, 4, 20, 20);
+        let shaftCupplerGeo = new CylinderGeometry(4, 5, 2, 20);
+        let boxGeo = new BoxGeometry(30, 10, 20);
+        let viewBoxGeo = new BoxGeometry(10, 7, 15);
+        let neckGeo = new CylinderGeometry(2, 5, 50, 4);
+        let supportGeo = new CylinderGeometry(2, 2, 20, 4);
+        let supportGeo2 = new CylinderGeometry(1.9, 1.9, 20, 4);
+        let supportGeo3 = new CylinderGeometry(1, 1, 10, 20);
+        let rope1Geo = new CylinderGeometry(.2, .2, 52, 20);
+        let rope2Geo = new CylinderGeometry(.2, .2, 50, 20);
+
+
 
         let mat = new MeshPhongMaterial({color: 0x5e5e5e});
         let base1 = new Mesh(baseGeo, mat);
@@ -16,6 +30,21 @@ export default class Crane {
         let leg1 = new Mesh(legGeo, mat);
         let leg2 = new Mesh(legGeo, mat);
         let cross = new Mesh(crossGeo, mat);
+        let shaft = new Mesh(shaftGeo, mat);
+        let shaftCuppler = new Mesh(shaftCupplerGeo, mat);
+        let box = new Mesh(boxGeo, mat);
+        let viewBox = new Mesh(viewBoxGeo, mat);
+        let neck = new Mesh(neckGeo, mat);
+        let support1 = new Mesh(supportGeo, mat);
+        let support2 = new Mesh(supportGeo, mat);
+        let support3 = new Mesh(supportGeo2, mat);
+        let support4 = new Mesh(supportGeo2, mat);
+        let support5 = new Mesh(supportGeo3, mat);
+        let rope1 = new Mesh(rope1Geo, mat);
+        this.rope2 = new Mesh(rope2Geo, mat);
+
+
+
 
         base1.translateZ(-10);
         base1.rotateZ(Math.degToRad(90));
@@ -37,11 +66,81 @@ export default class Crane {
         cross.rotateX(Math.degToRad(90));
         cross.rotateY(Math.degToRad(45));
 
+        shaft.translateY(35);
+
+        shaftCuppler.translateY(26);
+
+        box.translateY(50);
+        box.translateX(10);
+
+        viewBox.translateY(49);
+        viewBox.translateX(-5);
+
+        neck.translateY(70);
+        neck.translateX(-18);
+        neck.rotateZ(Math.degToRad(45));
+        neck.rotateY(Math.degToRad(45));
+
+        support1.translateY(65);
+        support1.translateX(15);
+        support1.translateZ(5);
+        support1.rotateY(Math.degToRad(45));
+
+        support2.translateY(65);
+        support2.translateX(15);
+        support2.translateZ(-5);
+        support2.rotateY(Math.degToRad(45));
+
+        support3.translateY(63);
+        support3.translateX(19.5);
+        support3.translateZ(5);
+        support3.rotateZ(Math.degToRad(25));
+        support3.rotateY(Math.degToRad(45));
+
+        support4.translateY(63);
+        support4.translateX(19.5);
+        support4.translateZ(-5);
+        support4.rotateZ(Math.degToRad(25));
+        support4.rotateY(Math.degToRad(45));
+
+        support5.translateY(73);
+        support5.translateX(15);
+        support5.rotateX(Math.degToRad(90));
+
+        rope1.translateY(80.7);
+        rope1.translateX(-10);
+        rope1.rotateZ(Math.degToRad(73));
+
+        this.rope2.translateY(60);
+        this.rope2.translateX(-35);
+
+
+        this.loader = new THREE.ObjectLoader();
+
+        this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
+            (obj) => {
+                obj.scale.set(5, 5, 5);
+                obj.translateY(30);
+                obj.translateX(-35);
+                this.containerGroup.add(obj); 
+            });
 
 
 
-        craneGroup.add(base1, base2, leg1, leg2, cross);
+        this.moveableCraneGroup.add(shaft, shaftCuppler, box, viewBox, neck, support1, support2, support3, support4, support5, rope1, this.rope2, this.containerGroup)
+        this.add(base1, base2, leg1, leg2, cross, this.moveableCraneGroup);
+    }
 
-        return craneGroup;
+    moveContainer(direction){
+        if(direction == "up"){
+            this.rope2.scale.y = this.rope2.scale.y - .0625;
+            this.rope2.translateY(1.5625);
+            this.containerGroup.translateY(3.135);
+        }
+        else if(direction == "down"){
+            this.rope2.scale.y = this.rope2.scale.y + .0625;
+            this.rope2.translateY(-1.5625);
+            this.containerGroup.translateY(-3.135);
+        }
     }
 }
