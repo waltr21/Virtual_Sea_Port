@@ -11,8 +11,6 @@ export default class Skybox {
         const right = new TextureLoader().load("Images/sea_lf.JPG");
         const left = new TextureLoader().load("Images/sea_rt.JPG");
 
-
-
         let geometry = new CubeGeometry( 900, 900, 900);
         let material =
             [
@@ -22,12 +20,10 @@ export default class Skybox {
                 new MeshBasicMaterial({map: down, side: DoubleSide}),
                 new MeshBasicMaterial({map: left, side: DoubleSide}),
                 new MeshBasicMaterial({map: right, side: DoubleSide}),
-
             ];
 
         let box = new Mesh( geometry, material );
         skyGroup.add(box);
-
 
         return skyGroup;
     }
