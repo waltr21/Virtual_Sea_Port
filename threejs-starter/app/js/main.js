@@ -129,7 +129,7 @@ export default class App {
         }
 
         // Rotate Crane
-        //this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
+        this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
 
        
     }
