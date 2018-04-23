@@ -86,8 +86,10 @@ export default class App {
 
         this.crane = new Crane();
         this.crane.translateY(10);
-
         this.scene.add(this.crane);
+        for(let i = 0; i < 30; i++){
+            this.crane.moveContainer("up");
+        }
 
 
 
@@ -116,18 +118,18 @@ export default class App {
         // Move crane box up and down
         this.counter++;
 
-        if(this.counter < 30 && this.counter % 3 == 0){
+        if(this.counter < 50 && this.counter % 2 == 0){
             this.crane.moveContainer("down");
         }
-        else if(this.counter > 30 && this.counter < 60 && this.counter % 3 == 0){
+        else if(this.counter > 50 && this.counter < 100 && this.counter % 2 == 0){
             this.crane.moveContainer("up");
         }
-        if(this.counter == 61){
+        if(this.counter == 101){
             this.counter = 0;
         }
 
         // Rotate Crane
-        this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
+        //this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
 
        
     }
