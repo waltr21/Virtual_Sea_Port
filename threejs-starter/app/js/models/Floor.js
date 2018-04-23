@@ -9,6 +9,7 @@ export default class Floor {
     let geometry = new PlaneGeometry( 1000, 1000);
     let material = new MeshPhongMaterial( {map : texture, side : DoubleSide} );
     let plane = new Mesh( geometry, material );
+    plane.receiveShadow = true;
     plane.rotateX(3.1415/2);
     floor.add(plane);
 
