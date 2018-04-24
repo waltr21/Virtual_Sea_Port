@@ -9,6 +9,7 @@ import Skybox from "./models/Skybox";
 import FishBoat from "./models/FishBoat";
 import Plane from "./models/Plane";
 import Sun from "./models/Sun";
+import CargoShip from "./models/CargoShip";
 
 
 
@@ -16,6 +17,8 @@ export default class App {
     constructor() {
         // Counter for moving crane
         this.counter = 0;
+        //Counter for moving ship
+        this.counterShip = 0;
 
         const c = document.getElementById('mycanvas');
         // Enable antialias for smoother lines
@@ -55,8 +58,6 @@ export default class App {
         this.scene.add(this.sun);
 
 
-
-
         // var loader = new THREE.ObjectLoader();
         // loader.load("/app/js/models/fishing-boat-threejs/fishing-boat.json", (obj) => {this.scene.add(obj)});
 
@@ -85,11 +86,21 @@ export default class App {
         this.plane.matrix.multiply(trans);
 
         this.crane = new Crane();
-        this.crane.translateY(10);
+        this.crane.translateY(12.5);
+        this.crane.translateX(70);
+        this.crane.translateZ(-20);
         this.scene.add(this.crane);
         for(let i = 0; i < 30; i++){
             this.crane.moveContainer("up");
         }
+
+        this.cargoShip = new CargoShip();
+        this.cargoShip.matrixAutoUpdate = false;
+        var transShip = new THREE.Matrix4().makeTranslation(25, 5, 0);
+        var rotZ = new THREE.Matrix4().makeRotationZ(-.1);
+        this.cargoShip.matrix.multiply(rotZ);
+        this.cargoShip.matrix.multiply(transShip);
+        this.scene.add(this.cargoShip);
 
 
 
@@ -131,7 +142,22 @@ export default class App {
         // Rotate Crane
         this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
 
-       
+        //Rock Cargo Ship
+        this.counterShip++;
+
+        if(this.counterShip < 200 && this.counterShip % 2 === 0){
+            let rotZ = new THREE.Matrix4().makeRotationZ(THREE.Math.degToRad(0.1));
+            this.cargoShip.matrix.multiply(rotZ);
+        }
+        else if(this.counterShip > 200 && this.counterShip < 400 && this.counterShip % 2 === 0){
+            let rotZ1 = new THREE.Matrix4().makeRotationZ(THREE.Math.degToRad(-0.1));
+            this.cargoShip.matrix.multiply(rotZ1);
+        }
+        if(this.counterShip === 401){
+            this.counterShip = 0;
+        }
+
+
     }
 
     resizeHandler() {

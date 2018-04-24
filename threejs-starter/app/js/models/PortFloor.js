@@ -8,7 +8,7 @@ import * as THREE from "three";
 
 
 export default class PortFloor {
-    constructor () { // number of spokes on the wheel
+    constructor () {
 
         //Creates a group for all port scenery
         this.floorGroup =  new Group();
