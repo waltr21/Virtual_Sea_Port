@@ -24,7 +24,7 @@ export default class PortFloor {
         let grass = new Mesh(geometry, material);
         grass.rotateX(THREE.Math.degToRad(90));
         grass.translateX(100);
-        grass.receiveShadow = true;
+        //grass.receiveShadow = true;
         this.floorGroup.add(grass);
 
         //testObject **************************************************************************
@@ -48,7 +48,7 @@ export default class PortFloor {
         wall.translateY(-5);
         wall.rotateY(THREE.Math.degToRad(90));
         wall.rotateX(THREE.Math.degToRad(180));
-        wall.receiveShadow = true;
+        //wall.receiveShadow = true;
         this.floorGroup.add(wall);
 
         //road horizontal
@@ -63,7 +63,7 @@ export default class PortFloor {
         road.translateY(.01);
         road.translateX(140);
         road.rotateX(THREE.Math.degToRad(90));
-        road.receiveShadow = true;
+        //road.receiveShadow = true;
         this.floorGroup.add(road);
 
         //road horizontal1
@@ -79,7 +79,7 @@ export default class PortFloor {
         roadh1.translateZ(160);
         roadh1.translateX(140);
         roadh1.rotateX(THREE.Math.degToRad(90));
-        roadh1.receiveShadow = true;
+        //roadh1.receiveShadow = true;
         this.floorGroup.add(roadh1);
 
         //road vertical
@@ -95,7 +95,7 @@ export default class PortFloor {
         road1.translateZ(80);
         road1.translateX(20);
         road1.rotateX(THREE.Math.degToRad(90));
-        road1.receiveShadow = true
+        //road1.receiveShadow = true
         this.floorGroup.add(road1);
 
         //road vertical1
@@ -111,7 +111,7 @@ export default class PortFloor {
         road2.translateZ(-230);
         road2.translateX(20);
         road2.rotateX(THREE.Math.degToRad(90));
-        road2.receiveShadow = true;
+        //road2.receiveShadow = true;
         this.floorGroup.add(road2);
 
         //road intersection
@@ -124,7 +124,7 @@ export default class PortFloor {
         roadBlank.translateX(20);
         roadBlank.rotateX(THREE.Math.degToRad(90));
         roadBlank.rotateZ(THREE.Math.degToRad(90));
-        roadBlank.receiveShadow = true;
+        //roadBlank.receiveShadow = true;
         this.floorGroup.add(roadBlank);
 
         //road turn
@@ -138,7 +138,7 @@ export default class PortFloor {
         roadTurn.rotateY(THREE.Math.degToRad(90));
         roadTurn.rotateX(THREE.Math.degToRad(90));
         roadTurn.rotateZ(THREE.Math.degToRad(90));
-        roadTurn.receiveShadow = true;
+        //roadTurn.receiveShadow = true;
         this.floorGroup.add(roadTurn);
 
         //asphalt port yard
@@ -153,7 +153,7 @@ export default class PortFloor {
         yard.translateY(.01);
         yard.translateX(-75);
         yard.rotateX(THREE.Math.degToRad(90));
-        yard.receiveShadow = true;
+        //yard.receiveShadow = true;
         this.floorGroup.add(yard);
 
         //portyard drive
@@ -168,7 +168,7 @@ export default class PortFloor {
         yardDrive.translateY(.01);
         yardDrive.translateX(5);
         yardDrive.rotateX(THREE.Math.degToRad(90));
-        yardDrive.receiveShadow = true;
+        //yardDrive.receiveShadow = true;
         this.floorGroup.add(yardDrive);
 
         //Runway
@@ -185,7 +185,7 @@ export default class PortFloor {
         runway.translateX(30);
         runway.rotateX(THREE.Math.degToRad(90));
         runway.rotateZ(THREE.Math.degToRad(-55));
-        runway.receiveShadow = true;
+        //runway.receiveShadow = true;
         this.floorGroup.add(runway);
 
         //wood decking
@@ -219,7 +219,7 @@ export default class PortFloor {
                 //ignore tree if it obstructs road
                 if((z > 20 || z < -25) && (z > 180 || z < 140) && z < 300) {
                     temp.position.set(x, 0, z);
-                    temp.castShadow = true;
+                    //temp.castShadow = true;
                     this.floorGroup.add(temp);
                 }
             }

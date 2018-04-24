@@ -11,7 +11,7 @@ export default class Sun {
         g.add( sphere );
 
         var spotLight = new SpotLight(0xffffff, 1.0);
-        spotLight.castShadow = true;
+        //spotLight.castShadow = true;
         spotLight.shadow.mapSize.width = 2000;
         spotLight.shadow.mapSize.height = 2000;
         spotLight.shadow.camera.near = 500;
