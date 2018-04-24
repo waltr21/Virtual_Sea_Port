@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 // import orbit from 'three-orbit-controls';
 // const OrbitControls = orbit(THREE);
+import VRControls from 'three-vrcontrols-module';
+import WebVRPolyfill from 'webvr-polyfill';
 import TrackballControls from 'three-trackballcontrols';
 import Floor from './models/Floor.js';
 import PortFloor from './models/PortFloor';
@@ -11,10 +13,12 @@ import Plane from "./models/Plane";
 import Sun from "./models/Sun";
 import CargoShip from "./models/CargoShip";
 
+var display, camControl;
 
 
 export default class App {
     constructor() {
+
         // Counter for moving crane
         this.counter = 0;
         //Counter for moving ship
@@ -25,16 +29,51 @@ export default class App {
         this.renderer = new THREE.WebGLRenderer({canvas: c, antialias: true});
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, 4/3, 0.5, 1000);
-        this.camera.position.z = 100;
+
+        //Position for non VR
+        //height of average human 5.6ft standing atop the platform 10ft above water level
+        this.camera.position.set(60, 15.6, 0);
+
 
         // const orbiter = new OrbitControls(this.camera);
         // orbiter.enableZoom = false;
         // orbiter.update();
 
-        this.tracker = new TrackballControls(this.camera, c);
-        this.tracker.rotateSpeed = 2.0;
-        this.tracker.noZoom = false;
-        this.tracker.noPan = false;
+        window.addEventListener('deviceorientation', event => {
+           //TODO: Use event.alpha, event.beta, event.gamma to update camera matrix
+        });
+
+        //VR controls
+        const polyfill = new WebVRPolyfill();
+        navigator.getVRDisplays().then(displays => {
+            if (displays.length > 0) {
+                // WebVR is supported
+                display = displays[0];
+                camControl = new VRControls(this.camera);
+
+                //this allows the camera to be set to an initial spot
+                this.dolly = new THREE.Group();
+                this.dolly.position.set( 240, 15.6, 10 );
+                this.scene.add( this.dolly );
+                this.dolly.add( this.camera);
+
+            } else {
+                // WebVR is NOT supported, fallback to trackball control
+                display = window;
+                this.tracker = new TrackballControls(this.camera, c);
+                this.tracker.rotateSpeed = 2.0;
+                this.tracker.noZoom = false;
+                this.tracker.noPan = false;
+                camControl = this.tracker;
+            }
+            //display.requestAnimationFrame(this.render);
+        });
+
+
+        // this.tracker = new TrackballControls(this.camera, c);
+        // this.tracker.rotateSpeed = 2.0;
+        // this.tracker.noZoom = false;
+        // this.tracker.noPan = false;
 
         const lightOne = new THREE.AmbientLight (0xFFFFFF, 0.5);
         lightOne.position.set (-50, 40, 100);
@@ -102,20 +141,22 @@ export default class App {
         this.cargoShip.matrix.multiply(transShip);
         this.scene.add(this.cargoShip);
 
-
-
         window.addEventListener('resize', () => this.resizeHandler());
         this.resizeHandler();
         requestAnimationFrame(() => this.render());
+
     }
 
     // objectLoad(obj){
     //     this.scene.add(obj);
     // }
 
+
     render() {
         this.renderer.render(this.scene, this.camera);
-        this.tracker.update();
+        camControl.update();
+        //this.tracker.update();
+        //display.requestAnimationFrame(this.render);
 
         let trans = new THREE.Matrix4().makeTranslation(-0.1,0,0);
         let rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(0.1));
@@ -172,7 +213,7 @@ export default class App {
         canvas.height = h;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(w, h);
-        this.tracker.handleResize();
+        //this.tracker.handleResize();
     }
     
 }
