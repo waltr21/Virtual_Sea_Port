@@ -117,12 +117,14 @@ export default class Crane extends Group {
 
         this.loader = new THREE.ObjectLoader();
 
-        this.loader.load("/app/js/models/containervan-threejs/containervan.json", 
+       
+        this.loader.load("/app/js/models/json-objects/cargo.json",
             (obj) => {
-                obj.scale.set(5, 5, 5);
-                obj.translateY(30);
+                obj.scale.set(.85, .77, .77);
+                obj.translateY(28);
                 obj.translateX(-35);
-                this.containerGroup.add(obj); 
+                obj.translateZ(12.5);
+                this.containerGroup.add(obj);
             });
 
 
