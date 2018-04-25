@@ -13,7 +13,7 @@ import Plane from "./models/Plane";
 import Sun from "./models/Sun";
 import CargoShip from "./models/CargoShip";
 
-var display, camControl;
+var display, camControl, dolly;
 
 
 export default class App {
@@ -34,13 +34,20 @@ export default class App {
         //height of average human 5.6ft standing atop the platform 10ft above water level
         this.camera.position.set(60, 15.6, 0);
 
+        //this allows the camera to be set to an initial spot
+        // this.dolly.position.set( 240, 15.6, 10 );
+        dolly = new THREE.Group();
+        dolly.add( this.camera);
+        dolly.matrixAutoUpdate = false;
+        this.scene.add( dolly );
+
 
         // const orbiter = new OrbitControls(this.camera);
         // orbiter.enableZoom = false;
         // orbiter.update();
 
         window.addEventListener('deviceorientation', event => {
-           //TODO: Use event.alpha, event.beta, event.gamma to update camera matrix
+            //TODO: Use event.alpha, event.beta, event.gamma to update camera matrix
         });
 
         //VR controls
@@ -51,11 +58,8 @@ export default class App {
                 display = displays[0];
                 camControl = new VRControls(this.camera);
 
-                //this allows the camera to be set to an initial spot
-                this.dolly = new THREE.Group();
-                this.dolly.position.set( 240, 15.6, 10 );
-                this.scene.add( this.dolly );
-                this.dolly.add( this.camera);
+                var trans = new THREE.Matrix4().makeTranslation(240, 15.6, 10);
+                dolly.matrix.multiply(trans);
 
             } else {
                 // WebVR is NOT supported, fallback to trackball control
@@ -145,7 +149,59 @@ export default class App {
         this.resizeHandler();
         requestAnimationFrame(() => this.render());
 
+        //Use Mumble library for voice commands
+        var Mumble = require('mumble-js');
+
+        var mumble = new Mumble({
+            language: 'en-US',
+            debug: false, // set to true to get some detailed information about what's going on
+
+            // define some commands using regex or a simple string for exact matching
+            commands: [{
+                name: 'move forward',
+                command: "move forward",
+
+                action: function() {
+                    moveBodyForward();
+                }
+            }, {
+                name: 'move backward',
+                command: "move backward",
+
+                action: function() {
+                    moveBodyBackward();
+                }
+            }, {
+                name: 'turn left',
+                command: "turn left",
+                action: function () {
+                    turnBodyLeft();
+                }
+            }, {
+                name: 'turn right',
+                command: "turn right",
+
+                action: function() {
+                    turnBodyRight();
+                }
+            }],
+
+            // define global callbacks (see docs for all)
+            callbacks: {
+                start: function(event) {
+                    //console.log('Starting..');
+                }
+            }
+        });
+
+
+        // start listening
+        mumble.start();
+
+
+
     }
+
 
     // objectLoad(obj){
     //     this.scene.add(obj);
@@ -155,8 +211,7 @@ export default class App {
     render() {
         this.renderer.render(this.scene, this.camera);
         camControl.update();
-        //this.tracker.update();
-        //display.requestAnimationFrame(this.render);
+
 
         let trans = new THREE.Matrix4().makeTranslation(-0.1,0,0);
         let rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(0.1));
@@ -216,4 +271,32 @@ export default class App {
         //this.tracker.handleResize();
     }
     
+}
+
+function moveBodyForward(){
+    var trans = new THREE.Matrix4().makeTranslation(0, 0, -20);
+    dolly.matrix.multiply(trans);
+
+    console.log("moving forward");
+}
+
+function moveBodyBackward(){
+    var trans = new THREE.Matrix4().makeTranslation(0, 0, 20);
+    dolly.matrix.multiply(trans);
+
+    console.log("moving backward");
+}
+
+function turnBodyLeft(){
+    var rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(90));
+    dolly.matrix.multiply(rotY);
+
+    console.log("turning left");
+}
+
+function turnBodyRight(){
+    var rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(-90));
+    dolly.matrix.multiply(rotY);
+
+    console.log("turning right");
 }
