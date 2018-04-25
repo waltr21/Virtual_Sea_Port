@@ -14,6 +14,8 @@ import Sun from "./models/Sun";
 import CargoShip from "./models/CargoShip";
 
 var display, camControl, dolly;
+var isWalking = false;
+var inVR;
 
 
 export default class App {
@@ -23,6 +25,8 @@ export default class App {
         this.counter = 0;
         //Counter for moving ship
         this.counterShip = 0;
+        //Counter for walking
+        this.counterWalk = 0;
 
         const c = document.getElementById('mycanvas');
         // Enable antialias for smoother lines
@@ -158,18 +162,18 @@ export default class App {
 
             // define some commands using regex or a simple string for exact matching
             commands: [{
-                name: 'move forward',
-                command: "move forward",
+                name: 'walk forward',
+                command: "walk",
 
                 action: function() {
-                    moveBodyForward();
+                    isWalking = true;
                 }
             }, {
-                name: 'move backward',
-                command: "move backward",
+                name: 'stop walking',
+                command: "stop",
 
                 action: function() {
-                    moveBodyBackward();
+                    isWalking = false;
                 }
             }, {
                 name: 'turn left',
@@ -217,6 +221,28 @@ export default class App {
         let rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(0.1));
         this.fBoat.matrix.multiply(trans);
         this.fBoat.matrix.multiply(rotY);
+
+        if(isWalking){
+            this.counterWalk++;
+
+            var transBody = new THREE.Matrix4().makeTranslation(0, 0, -.1);
+            dolly.matrix.multiply(transBody);
+            console.log("moving forward");
+
+            //head bob
+            if(this.counterWalk < 25 && this.counterWalk % 2 === 0){
+                var transUp = new THREE.Matrix4().makeTranslation(0, .02, 0);
+                dolly.matrix.multiply(transUp);
+            }else if (this.counterWalk > 25 && this.counterWalk < 50 && this.counterWalk % 2 === 0){
+                var transDown = new THREE.Matrix4().makeTranslation(0, -.02, 0);
+                dolly.matrix.multiply(transDown);
+            }
+            if(this.counterWalk === 51){
+                this.counterWalk = 0;
+            }
+        }else{
+            this.counterWalk = 0;
+        }
 
 
 
@@ -273,19 +299,6 @@ export default class App {
     
 }
 
-function moveBodyForward(){
-    var trans = new THREE.Matrix4().makeTranslation(0, 0, -20);
-    dolly.matrix.multiply(trans);
-
-    console.log("moving forward");
-}
-
-function moveBodyBackward(){
-    var trans = new THREE.Matrix4().makeTranslation(0, 0, 20);
-    dolly.matrix.multiply(trans);
-
-    console.log("moving backward");
-}
 
 function turnBodyLeft(){
     var rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(90));

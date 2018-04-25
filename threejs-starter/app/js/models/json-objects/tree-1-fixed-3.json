@@ -51,7 +51,7 @@
         "type": "Geometry"
     }],
     "materials": [{
-        "shininess": 50,
+        "shininess": 0,
         "specular": 328965,
         "emissive": 0,
         "name": "tree1",
