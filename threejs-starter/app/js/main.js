@@ -21,6 +21,7 @@ export default class App {
 
         // Counter for moving crane
         this.counter = 0;
+        this.craneStage = 0;
         //Counter for moving ship
         this.counterShip = 0;
 
@@ -130,16 +131,16 @@ export default class App {
 
         this.crane = new Crane();
         this.crane.translateY(12.5);
-        this.crane.translateX(70);
-        this.crane.translateZ(-20);
+        this.crane.translateX(74);
+        this.crane.translateZ(-30);
         this.scene.add(this.crane);
-        for(let i = 0; i < 30; i++){
-            this.crane.moveContainer("up");
+        for(let i = 0; i < 35; i++){
+            this.crane.moveContainer("down");
         }
 
         this.cargoShip = new CargoShip();
         this.cargoShip.matrixAutoUpdate = false;
-        var transShip = new THREE.Matrix4().makeTranslation(25, 5, 0);
+        var transShip = new THREE.Matrix4().makeTranslation(28, 5, 0);
         var rotZ = new THREE.Matrix4().makeRotationZ(-.1);
         this.cargoShip.matrix.multiply(rotZ);
         this.cargoShip.matrix.multiply(transShip);
@@ -225,18 +226,78 @@ export default class App {
         // Move crane box up and down
         this.counter++;
 
-        if(this.counter < 50 && this.counter % 2 == 0){
-            this.crane.moveContainer("down");
-        }
-        else if(this.counter > 50 && this.counter < 100 && this.counter % 2 == 0){
-            this.crane.moveContainer("up");
-        }
-        if(this.counter == 101){
-            this.counter = 0;
+        if(this.craneStage == 0){
+            if(this.counter < 40 ){
+                this.crane.moveContainer("up");
+            }
+            else{
+                this.craneStage = 1;
+                this.counter = 0;
+            }
         }
 
+        else if(this.craneStage == 1){
+            if(this.counter < 90){
+                this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(-1));
+            }
+            else{
+                this.craneStage = 2;
+                this.counter = 40;
+            }
+        }
+
+        else if(this.craneStage == 2){
+            if(this.counter > 40 && this.counter < 53 ){
+                this.crane.moveContainer("down");
+            }
+            else if(this.counter < 100){
+                // Makes it stop for a bit
+            }
+            else{
+                this.counter = 0;
+                this.craneStage = 3
+            }
+        }
+
+        if(this.craneStage == 3){
+            if(this.counter < 12 ){
+                this.crane.moveContainer("up");
+            }
+            else{
+                this.craneStage = 4;
+                this.counter = 0;
+            }
+        }
+
+        else if(this.craneStage == 4){
+            if(this.counter < 90){
+                this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
+            }
+            else{
+                this.craneStage = 5;
+                this.counter = 40;
+            }
+        }
+
+        else if(this.craneStage == 5){
+            if(this.counter > 40 && this.counter < 80){
+                this.crane.moveContainer("down");
+            }
+            else if(this.counter < 120){
+                // Makes it stop for a bit
+            }
+            else{
+                this.counter = 0;
+                this.craneStage = 0
+            }
+        }
+        
+        // if(this.counter == 161){
+        //     this.counter = 0;
+        // }
+
         // Rotate Crane
-        this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
+        //this.crane.moveableCraneGroup.rotateY(THREE.Math.degToRad(1));
 
         //Rock Cargo Ship
         this.counterShip++;
