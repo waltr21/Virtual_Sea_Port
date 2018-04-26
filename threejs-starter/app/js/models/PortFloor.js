@@ -20,7 +20,7 @@ export default class PortFloor {
         grassTex.repeat.x = 50;
         grassTex.repeat.y = 100;
         let geometry = new PlaneGeometry(500, 1000);
-        let material = new MeshPhongMaterial({map: grassTex, side: DoubleSide});
+        let material = new MeshPhongMaterial({map: grassTex, side: DoubleSide, shininess: 0});
         let grass = new Mesh(geometry, material);
         grass.rotateX(THREE.Math.degToRad(90));
         grass.translateX(100);
@@ -58,7 +58,7 @@ export default class PortFloor {
         leftRightRoad.repeat.x = 11;
         leftRightRoad.repeat.y = 1;
         let geometry2 = new PlaneGeometry(220, 20);
-        let material2 = new MeshPhongMaterial({map: leftRightRoad, side: DoubleSide});
+        let material2 = new MeshPhongMaterial({map: leftRightRoad, side: DoubleSide, shininess: 0});
         let road = new Mesh(geometry2, material2);
         road.translateY(.01);
         road.translateX(140);
@@ -73,7 +73,7 @@ export default class PortFloor {
         leftRightRoad1.repeat.x = 11;
         leftRightRoad1.repeat.y = 1;
         let geometry10 = new PlaneGeometry(220, 20);
-        let material10 = new MeshPhongMaterial({map: leftRightRoad1, side: DoubleSide});
+        let material10 = new MeshPhongMaterial({map: leftRightRoad1, side: DoubleSide, shininess: 0});
         let roadh1 = new Mesh(geometry10, material10);
         roadh1.translateY(.01);
         roadh1.translateZ(160);
@@ -89,7 +89,7 @@ export default class PortFloor {
         upDownRoad.repeat.x = 1;
         upDownRoad.repeat.y = 7;
         let geometry9 = new PlaneGeometry(20, 140);
-        let material9 = new MeshPhongMaterial({map: upDownRoad, side: DoubleSide});
+        let material9 = new MeshPhongMaterial({map: upDownRoad, side: DoubleSide, shininess: 0});
         let road1 = new Mesh(geometry9, material9);
         road1.translateY(.01);
         road1.translateZ(80);
@@ -105,7 +105,7 @@ export default class PortFloor {
         upDownRoad1.repeat.x = 1;
         upDownRoad1.repeat.y = 20;
         let geometry3 = new PlaneGeometry(20, 440);
-        let material3 = new MeshPhongMaterial({map: upDownRoad1, side: DoubleSide});
+        let material3 = new MeshPhongMaterial({map: upDownRoad1, side: DoubleSide, shininess: 0});
         let road2 = new Mesh(geometry3, material3);
         road2.translateY(.01);
         road2.translateZ(-230);
@@ -117,7 +117,7 @@ export default class PortFloor {
         //road intersection
         const roadB = new TextureLoader().load("Images/intersection3.jpg");
         let geometry4 = new PlaneGeometry(20, 20);
-        let material4 = new MeshPhongMaterial({map: roadB, side: DoubleSide});
+        let material4 = new MeshPhongMaterial({map: roadB, side: DoubleSide, shininess: 0});
         let roadBlank = new Mesh(geometry4, material4);
         roadBlank.translateY(.01);
         roadBlank.translateZ(0);
@@ -130,7 +130,7 @@ export default class PortFloor {
         //road turn
         const roadT = new TextureLoader().load("Images/turn.jpg");
         let geometry8 = new PlaneGeometry(20, 20);
-        let material8 = new MeshPhongMaterial({map: roadT, side: DoubleSide});
+        let material8 = new MeshPhongMaterial({map: roadT, side: DoubleSide, shininess: 0});
         let roadTurn = new Mesh(geometry8, material8);
         roadTurn.translateY(.01);
         roadTurn.translateZ(160);
@@ -148,7 +148,7 @@ export default class PortFloor {
         asphalt.repeat.x = 150;
         asphalt.repeat.y = 200;
         let geometry5 = new PlaneGeometry(150, 200);
-        let material5 = new MeshPhongMaterial({map: asphalt, side: DoubleSide});
+        let material5 = new MeshPhongMaterial({map: asphalt, side: DoubleSide, shininess: 0});
         let yard = new Mesh(geometry5, material5);
         yard.translateY(.01);
         yard.translateX(-75);
@@ -163,7 +163,7 @@ export default class PortFloor {
         asphalt1.repeat.x = 10;
         asphalt1.repeat.y = 20;
         let geometry6 = new PlaneGeometry(10, 20);
-        let material6 = new MeshPhongMaterial({map: asphalt1, side: DoubleSide});
+        let material6 = new MeshPhongMaterial({map: asphalt1, side: DoubleSide, shininess: 0});
         let yardDrive = new Mesh(geometry6, material6);
         yardDrive.translateY(.01);
         yardDrive.translateX(5);
@@ -178,7 +178,7 @@ export default class PortFloor {
         runwayTex.repeat.x = 1;
         runwayTex.repeat.y = 16;
         let geometry11 = new PlaneGeometry(30, 400);
-        let material11 = new MeshPhongMaterial({map: runwayTex, side: DoubleSide});
+        let material11 = new MeshPhongMaterial({map: runwayTex, side: DoubleSide, shininess: 0});
         let runway = new Mesh(geometry11, material11);
         runway.translateY(.01);
         runway.translateZ(350);
@@ -207,7 +207,7 @@ export default class PortFloor {
 
         //trees
         this.loader.load("/app/js/models/json-objects/tree-1-fixed-3.json", (obj) => {
-            for (var i = 0; i < 100; i++) {
+            for (var i = 0; i < 50; i++) {
                 var size = getRandomArbitrary(.3, .6);
                 var temp = obj.clone();
                 temp.scale.set(size, size, size);
@@ -234,7 +234,7 @@ export default class PortFloor {
             obj.scale.set(.03, .03, .03);
 
             obj.rotateY(THREE.Math.degToRad(-90));
-            for (var i = 0; i < 8; i++) {
+            for (var i = 0; i < 4; i++) {
                 var temp = obj.clone();
                 z = -100 + ((i + 1) * 10);
                 temp.position.set(x, y, z);
@@ -401,8 +401,8 @@ export default class PortFloor {
                     var temp = obj.clone();
                     y = i * 8;
                     if(i % 2 !== 0) {
-                        temp.position.set(x, y, z);
-                        this.floorGroup.add(temp);
+                        // temp.position.set(x, y, z);
+                        // this.floorGroup.add(temp);
                     }else {
                         temp.position.set(x + 20, y, z);
                         this.floorGroup.add(temp);
@@ -424,8 +424,9 @@ export default class PortFloor {
                         temp.position.set(x, y, z);
                         this.floorGroup.add(temp);
                     } else {
-                        temp.position.set(x + 20, y, z);
-                        this.floorGroup.add(temp);
+                        //commented to lighten cpu load
+                        // temp.position.set(x + 20, y, z);
+                        // this.floorGroup.add(temp);
                     }
                 }
             });
@@ -442,8 +443,8 @@ export default class PortFloor {
                     var temp = obj.clone();
                     y = i * 8;
                     if(i % 1 !== 0) {
-                        temp.position.set(x, y, z);
-                        this.floorGroup.add(temp);
+                       // temp.position.set(x, y, z);
+                        //this.floorGroup.add(temp);
                     }else {
                         temp.position.set(x + 20, y, z);
                         this.floorGroup.add(temp);
@@ -462,8 +463,8 @@ export default class PortFloor {
                     var temp = obj.clone();
                     y = i * 8;
                     if(i % 3 === 0) {
-                        temp.position.set(x, y, z);
-                        this.floorGroup.add(temp);
+                        // temp.position.set(x, y, z);
+                        // this.floorGroup.add(temp);
                     } else {
                         temp.position.set(x + 20, y, z);
                         this.floorGroup.add(temp);
@@ -506,8 +507,8 @@ export default class PortFloor {
                         temp.position.set(x, y, z);
                         this.floorGroup.add(temp);
                     } else {
-                        temp.position.set(x + 20, y, z);
-                        this.floorGroup.add(temp);
+                        //temp.position.set(x + 20, y, z);
+                        //this.floorGroup.add(temp);
                     }
                 }
             });
@@ -544,8 +545,8 @@ export default class PortFloor {
                     var temp = obj.clone();
                     y = i * 8;
                     if(i % 4 === 0) {
-                        temp.position.set(x, y, z);
-                        this.floorGroup.add(temp);
+                        // temp.position.set(x, y, z);
+                        // this.floorGroup.add(temp);
                     } else {
                         temp.position.set(x + 20, y, z);
                         this.floorGroup.add(temp);
