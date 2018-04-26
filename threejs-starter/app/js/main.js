@@ -24,60 +24,68 @@ export default class App {
         //Counter for moving ship
         this.counterShip = 0;
 
+
+
+        this.sunAdjust = -0.04;
+        this.lightIntensity = 1.0;
+
         const c = document.getElementById('mycanvas');
         // Enable antialias for smoother lines
         this.renderer = new THREE.WebGLRenderer({canvas: c, antialias: true});
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, 4/3, 0.5, 1000);
+        this.camera.position.z = 100;
 
         //Position for non VR
         //height of average human 5.6ft standing atop the platform 10ft above water level
-        this.camera.position.set(60, 15.6, 0);
+        //this.camera.position.set(0, 0, 0);
 
 
         // const orbiter = new OrbitControls(this.camera);
         // orbiter.enableZoom = false;
         // orbiter.update();
 
+        this.tracker = new TrackballControls(this.camera, c);
+        this.tracker.rotateSpeed = 2.0;
+        this.tracker.noZoom = false;
+        this.tracker.noPan = false;
+
         window.addEventListener('deviceorientation', event => {
            //TODO: Use event.alpha, event.beta, event.gamma to update camera matrix
         });
 
-        //VR controls
-        const polyfill = new WebVRPolyfill();
-        navigator.getVRDisplays().then(displays => {
-            if (displays.length > 0) {
-                // WebVR is supported
-                display = displays[0];
-                camControl = new VRControls(this.camera);
+        // //VR controls
+        // const polyfill = new WebVRPolyfill();
+        // navigator.getVRDisplays().then(displays => {
+        //     if (displays.length > 0) {
+        //         // WebVR is supported
+        //         display = displays[0];
+        //         camControl = new VRControls(this.camera);
+        //
+        //         //this allows the camera to be set to an initial spot
+        //         this.dolly = new THREE.Group();
+        //         this.dolly.position.set( 0, 15.6, 10 );
+        //         this.scene.add( this.dolly );
+        //         this.dolly.add( this.camera);
+        //
+        //     } else {
+        //         // WebVR is NOT supported, fallback to trackball control
+        //         display = window;
+        //         this.tracker = new TrackballControls(this.camera, c);
+        //         this.tracker.rotateSpeed = 2.0;
+        //         this.tracker.noZoom = false;
+        //         this.tracker.noPan = false;
+        //         camControl = this.tracker;
+        //     }
+        //     //display.requestAnimationFrame(this.render);
+        // });
 
-                //this allows the camera to be set to an initial spot
-                this.dolly = new THREE.Group();
-                this.dolly.position.set( 240, 15.6, 10 );
-                this.scene.add( this.dolly );
-                this.dolly.add( this.camera);
-
-            } else {
-                // WebVR is NOT supported, fallback to trackball control
-                display = window;
-                this.tracker = new TrackballControls(this.camera, c);
-                this.tracker.rotateSpeed = 2.0;
-                this.tracker.noZoom = false;
-                this.tracker.noPan = false;
-                camControl = this.tracker;
-            }
-            //display.requestAnimationFrame(this.render);
-        });
 
 
-        // this.tracker = new TrackballControls(this.camera, c);
-        // this.tracker.rotateSpeed = 2.0;
-        // this.tracker.noZoom = false;
-        // this.tracker.noPan = false;
 
-        const lightOne = new THREE.AmbientLight (0xFFFFFF, 0.5);
-        lightOne.position.set (-50, 40, 100);
-        this.scene.add (lightOne);
+        this.lightOne = new THREE.AmbientLight (0xFFFFFF, this.lightIntensity);
+        //this.lightOne.position.set (-50, 40, 100);
+        this.scene.add (this.lightOne);
 
         this.water = new Floor();
         this.scene.add(this.water);
@@ -92,25 +100,12 @@ export default class App {
 
         this.sun = new Sun();
         this.sun.matrixAutoUpdate = false;
-        let trans = new THREE.Matrix4().makeTranslation(0, 150, 550);
-        this.sun.matrix.multiply(trans);
         this.scene.add(this.sun);
+        let trans = new THREE.Matrix4().makeTranslation(0, 150, 400);
+        this.sun.matrix.multiply(trans);
 
 
-        // var loader = new THREE.ObjectLoader();
-        // loader.load("/app/js/models/fishing-boat-threejs/fishing-boat.json", (obj) => {this.scene.add(obj)});
-
-
-
-        this.thingy = new THREE.Object3D;
         this.loader = new THREE.ObjectLoader();
-
-        //this.fishBoat = null;
-
-        // Cooler container that has images all messed up.
-        //this.loader.load("/app/js/models/boat-threejs/boat.json", (obj) => {this.scene.add(obj)});
-
-
 
         this.fBoat = new FishBoat();
         this.scene.add(this.fBoat);
@@ -147,15 +142,10 @@ export default class App {
 
     }
 
-    // objectLoad(obj){
-    //     this.scene.add(obj);
-    // }
-
-
     render() {
         this.renderer.render(this.scene, this.camera);
-        camControl.update();
-        //this.tracker.update();
+        //camControl.update();
+        this.tracker.update();
         //display.requestAnimationFrame(this.render);
 
         let trans = new THREE.Matrix4().makeTranslation(-0.1,0,0);
@@ -163,9 +153,27 @@ export default class App {
         this.fBoat.matrix.multiply(trans);
         this.fBoat.matrix.multiply(rotY);
 
+        let rotX = new THREE.Matrix4().makeRotationX(THREE.Math.degToRad(this.sunAdjust));
+        this.sun.matrix.premultiply(rotX);
 
+        let position = new THREE.Vector3();
+        position.setFromMatrixPosition( this.sun.matrixWorld );
 
-        requestAnimationFrame(() => this.render());
+        if (position.y < 200 && position.y > 0) {
+            this.sun.editColor(position.y);
+            let intensitySub =  ((200 - position.y) / 200) * 0.7;
+            this.lightIntensity = 1 - intensitySub;
+            this.lightOne.intensity = this.lightIntensity;
+        }
+
+        if (position.y < -50){
+            this.sunAdjust = -0.5;
+            this.sun.dimLight(0);
+        }
+        else{
+            this.sunAdjust = -0.04;
+            this.sun.dimLight(1.0 - this.lightIntensity);
+        }
 
         // Move crane box up and down
         this.counter++;
@@ -198,6 +206,7 @@ export default class App {
             this.counterShip = 0;
         }
 
+        requestAnimationFrame(() => this.render());
 
     }
 
