@@ -43,7 +43,7 @@ module.exports = {
         }
       },
         {                     // additional loader
-            test: /\.(jpg|png|jpeg|gif)$/,
+            test: /\.(jpg|png|jpeg|gif|json)$/,
             include: ROOT_PATH,
             loader: 'file-loader'
         }
