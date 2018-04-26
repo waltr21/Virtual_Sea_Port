@@ -2391,6 +2391,10 @@ multicast-dns@^6.0.1:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
 
+mumble-js@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/mumble-js/-/mumble-js-1.0.1.tgz#721cc723068b455dcd9650ff366259e87002369e"
+
 nan@^2.3.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"

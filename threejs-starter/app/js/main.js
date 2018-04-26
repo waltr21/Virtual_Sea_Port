@@ -266,7 +266,7 @@ export default class App {
         }
         else{
             this.sunAdjust = -0.04;
-            this.sun.dimLight(1.0 - this.lightIntensity);
+            this.sun.dimLight(1.1 - this.lightIntensity);
         }
 
         // Move crane box up and down
