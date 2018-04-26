@@ -8,6 +8,9 @@ export default class Crane extends Group {
         this.moveableCraneGroup = new Group();
         this.containerGroup = new Group();
 
+        const red_metalTex = new TextureLoader().load("Images/red_metal2.jpg");
+        const windowsTex = new TextureLoader().load("Images/windows2.png");
+
         let baseGeo = new CylinderGeometry(4, 4, 30, 4);
         let legGeo = new CylinderGeometry(3, 3, 20, 4);
         let crossGeo = new CylinderGeometry(7, 7, 25, 4);
@@ -25,21 +28,24 @@ export default class Crane extends Group {
 
 
         let mat = new MeshPhongMaterial({color: 0x5e5e5e});
-        let base1 = new Mesh(baseGeo, mat);
-        let base2 = new Mesh(baseGeo, mat);
-        let leg1 = new Mesh(legGeo, mat);
-        let leg2 = new Mesh(legGeo, mat);
-        let cross = new Mesh(crossGeo, mat);
-        let shaft = new Mesh(shaftGeo, mat);
-        let shaftCuppler = new Mesh(shaftCupplerGeo, mat);
-        let box = new Mesh(boxGeo, mat);
-        let viewBox = new Mesh(viewBoxGeo, mat);
-        let neck = new Mesh(neckGeo, mat);
-        let support1 = new Mesh(supportGeo, mat);
-        let support2 = new Mesh(supportGeo, mat);
-        let support3 = new Mesh(supportGeo2, mat);
-        let support4 = new Mesh(supportGeo2, mat);
-        let support5 = new Mesh(supportGeo3, mat);
+        let red_mat = new MeshPhongMaterial({map: red_metalTex});
+        let win_mat = new MeshPhongMaterial({map: windowsTex});
+
+        let base1 = new Mesh(baseGeo, red_mat);
+        let base2 = new Mesh(baseGeo, red_mat);
+        let leg1 = new Mesh(legGeo, red_mat);
+        let leg2 = new Mesh(legGeo, red_mat);
+        let cross = new Mesh(crossGeo, red_mat);
+        let shaft = new Mesh(shaftGeo, red_mat);
+        let shaftCuppler = new Mesh(shaftCupplerGeo, red_mat);
+        let box = new Mesh(boxGeo, red_mat);
+        let viewBox = new Mesh(viewBoxGeo, [red_mat, win_mat, red_mat, red_mat, red_mat, red_mat]);
+        let neck = new Mesh(neckGeo, red_mat);
+        let support1 = new Mesh(supportGeo, red_mat);
+        let support2 = new Mesh(supportGeo, red_mat);
+        let support3 = new Mesh(supportGeo2, red_mat);
+        let support4 = new Mesh(supportGeo2, red_mat);
+        let support5 = new Mesh(supportGeo3, red_mat);
         let rope1 = new Mesh(rope1Geo, mat);
         this.rope2 = new Mesh(rope2Geo, mat);
 
