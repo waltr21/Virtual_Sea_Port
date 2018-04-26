@@ -268,12 +268,12 @@ export default class PortFloor {
         roof.repeat.y = 30;
         var geometry = new THREE.BoxGeometry( 75, 20, 50 );
         var material =  [
-            new MeshBasicMaterial({map: siding, side: DoubleSide}),
-            new MeshBasicMaterial({map: siding, side: DoubleSide}),
-            new MeshBasicMaterial({map: roof, side: DoubleSide}),
-            new MeshBasicMaterial({color: 0x111111, side: DoubleSide}),
-            new MeshBasicMaterial({map: siding, side: DoubleSide}),
-            new MeshBasicMaterial({map: loadingBay, side: DoubleSide}),
+            new MeshPhongMaterial({map: siding, side: DoubleSide}),
+            new MeshPhongMaterial({map: siding, side: DoubleSide}),
+            new MeshPhongMaterial({map: roof, side: DoubleSide, shininess: 0}),
+            new MeshPhongMaterial({color: 0x111111, side: DoubleSide}),
+            new MeshPhongMaterial({map: siding, side: DoubleSide}),
+            new MeshPhongMaterial({map: loadingBay, side: DoubleSide}),
         ];
         var warehouse = new THREE.Mesh( geometry, material );
         warehouse.translateY(10);
