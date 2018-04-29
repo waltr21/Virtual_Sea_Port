@@ -16,7 +16,8 @@ import roadVImage from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_
 import intersection3Image from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_Sea_Port/threejs-starter/Images/intersection3.jpg";
 import intersection4Image from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_Sea_Port/threejs-starter/Images/intersection4.jpg";
 import treeModel from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/tree.json";
-import treeImage from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/tree1.png";
+import truckModel from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_Sea_Port/threejs-starter/app/js/models/truck/delivery-truck.json";
+
 
 
 export default class PortFloor {
@@ -239,7 +240,7 @@ export default class PortFloor {
 
 
         //trucks
-        this.loader.load("/app/js/models/truck/delivery-truck.json", (obj) => {
+        this.loader.load(truckModel, (obj) => {
             var x = -13;
             var y = 0;
             var z = 0;

@@ -1,5 +1,7 @@
 import { TextureLoader, PlaneGeometry, BoxGeometry, CylinderGeometry, DoubleSide, MeshPhongMaterial, MeshBasicMaterial, Mesh, Group, Math, RepeatWrapping} from 'three';
 import * as THREE from "three";
+import craneModel from "/Users/ryanwalt/Downloads/CODE/WebstormProjects/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/cargo.json";
+
 
 export default class Crane extends Group {
     constructor () { 
@@ -118,7 +120,7 @@ export default class Crane extends Group {
         this.loader = new THREE.ObjectLoader();
 
        
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(craneModel,
             (obj) => {
                 obj.scale.set(.85, .77, .77);
                 obj.translateY(28);
