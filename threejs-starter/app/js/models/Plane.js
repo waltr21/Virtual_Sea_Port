@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import planeModel from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/app/js/models/AirPlane/AirPlane.json";
+
 
 export default class Plane {
     constructor () {
@@ -7,7 +9,7 @@ export default class Plane {
         this.loader = new THREE.ObjectLoader();
 
 
-        this.loader.load("/app/js/models/AirPlane/AirPlane.json",
+        this.loader.load(planeModel,
             (obj) => {
                 obj.scale.set(2, 2, 2);
                 //obj.castShadow = true;

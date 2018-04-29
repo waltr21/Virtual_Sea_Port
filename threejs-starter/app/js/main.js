@@ -229,7 +229,6 @@ export default class App {
 
             var transBody = new THREE.Matrix4().makeTranslation(0, 0, -.1);
             dolly.matrix.multiply(transBody);
-            // console.log("moving forward");
 
             //head bob
             if(this.counterWalk < 25 && this.counterWalk % 2 === 0){
@@ -386,12 +385,12 @@ function turnBodyLeft(){
     var rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(90));
     dolly.matrix.multiply(rotY);
 
-    // console.log("turning left");
+
 }
 
 function turnBodyRight(){
     var rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(-90));
     dolly.matrix.multiply(rotY);
 
-    // console.log("turning right");
+
 }

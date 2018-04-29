@@ -4,7 +4,24 @@ import {
 } from 'three';
 import * as THREE from "three";
 //import * as THREE from 'three';
-//import grass from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/images/grass.jpg";
+import grassImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/grass.jpg";
+import metalImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/metal.jpg";
+import roadImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/road.jpg";
+import turnImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/turn.jpg";
+import asphaltImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/asphalt.jpg";
+import runwayImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/runway.jpg";
+import roadVImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/roadv.jpg";
+import intersection3Image from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/intersection3.jpg";
+import intersection4Image from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/intersection4.jpg";
+import treeModel from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/tree.json";
+import truckModel from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/app/js/models/truck/delivery-truck.json";
+import cargoModel from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/cargo.json";
+import cargo1Model from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/cargo1.json";
+import warehouseTex from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/blankSide.jpg";
+import warehouseTex1 from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/loadingBay.jpg";
+import roofTex from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/gravelRoof.jpg";
+
+
 
 
 export default class PortFloor {
@@ -14,7 +31,7 @@ export default class PortFloor {
         this.floorGroup =  new Group();
 
         //grass
-        const grassTex = new TextureLoader().load("Images/grass.jpg");
+        const grassTex = new TextureLoader().load(grassImage);
         grassTex.wrapS = RepeatWrapping;
         grassTex.wrapT = RepeatWrapping;
         grassTex.repeat.x = 50;
@@ -36,7 +53,7 @@ export default class PortFloor {
         //*************************************************************************************
 
         //wall
-        const metalTex = new TextureLoader().load("Images/metal.jpg");
+        const metalTex = new TextureLoader().load(metalImage);
         metalTex.wrapS = RepeatWrapping;
         metalTex.wrapT = RepeatWrapping;
         metalTex.repeat.x = 100;
@@ -52,7 +69,7 @@ export default class PortFloor {
         this.floorGroup.add(wall);
 
         //road horizontal
-        const leftRightRoad = new TextureLoader().load("Images/road.jpg");
+        const leftRightRoad = new TextureLoader().load(roadImage);
         leftRightRoad.wrapS = RepeatWrapping;
         leftRightRoad.wrapT = RepeatWrapping;
         leftRightRoad.repeat.x = 11;
@@ -67,7 +84,7 @@ export default class PortFloor {
         this.floorGroup.add(road);
 
         //road horizontal1
-        const leftRightRoad1 = new TextureLoader().load("Images/road.jpg");
+        const leftRightRoad1 = new TextureLoader().load(roadImage);
         leftRightRoad1.wrapS = RepeatWrapping;
         leftRightRoad1.wrapT = RepeatWrapping;
         leftRightRoad1.repeat.x = 11;
@@ -83,7 +100,7 @@ export default class PortFloor {
         this.floorGroup.add(roadh1);
 
         //road vertical
-        const upDownRoad = new TextureLoader().load("Images/roadv.jpg");
+        const upDownRoad = new TextureLoader().load(roadVImage);
         upDownRoad.wrapS = RepeatWrapping;
         upDownRoad.wrapT = RepeatWrapping;
         upDownRoad.repeat.x = 1;
@@ -99,7 +116,7 @@ export default class PortFloor {
         this.floorGroup.add(road1);
 
         //road vertical1
-        const upDownRoad1 = new TextureLoader().load("Images/roadv.jpg");
+        const upDownRoad1 = new TextureLoader().load(roadVImage);
         upDownRoad1.wrapS = RepeatWrapping;
         upDownRoad1.wrapT = RepeatWrapping;
         upDownRoad1.repeat.x = 1;
@@ -115,7 +132,7 @@ export default class PortFloor {
         this.floorGroup.add(road2);
 
         //road intersection
-        const roadB = new TextureLoader().load("Images/intersection3.jpg");
+        const roadB = new TextureLoader().load(intersection3Image);
         let geometry4 = new PlaneGeometry(20, 20);
         let material4 = new MeshPhongMaterial({map: roadB, side: DoubleSide, shininess: 0});
         let roadBlank = new Mesh(geometry4, material4);
@@ -128,7 +145,7 @@ export default class PortFloor {
         this.floorGroup.add(roadBlank);
 
         //road turn
-        const roadT = new TextureLoader().load("Images/turn.jpg");
+        const roadT = new TextureLoader().load(turnImage);
         let geometry8 = new PlaneGeometry(20, 20);
         let material8 = new MeshPhongMaterial({map: roadT, side: DoubleSide, shininess: 0});
         let roadTurn = new Mesh(geometry8, material8);
@@ -142,7 +159,7 @@ export default class PortFloor {
         this.floorGroup.add(roadTurn);
 
         //asphalt port yard
-        const asphalt = new TextureLoader().load("Images/asphalt.jpg");
+        const asphalt = new TextureLoader().load(asphaltImage);
         asphalt.wrapS = RepeatWrapping;
         asphalt.wrapT = RepeatWrapping;
         asphalt.repeat.x = 150;
@@ -157,7 +174,7 @@ export default class PortFloor {
         this.floorGroup.add(yard);
 
         //portyard drive
-        const asphalt1 = new TextureLoader().load("Images/asphalt.jpg");
+        const asphalt1 = new TextureLoader().load(asphaltImage);
         asphalt1.wrapS = RepeatWrapping;
         asphalt1.wrapT = RepeatWrapping;
         asphalt1.repeat.x = 10;
@@ -172,7 +189,7 @@ export default class PortFloor {
         this.floorGroup.add(yardDrive);
 
         //Runway
-        const runwayTex = new TextureLoader().load("Images/runway.jpg");
+        const runwayTex = new TextureLoader().load(runwayImage);
         runwayTex.wrapS = RepeatWrapping;
         runwayTex.wrapT = RepeatWrapping;
         runwayTex.repeat.x = 1;
@@ -206,7 +223,7 @@ export default class PortFloor {
 
 
         //trees
-        this.loader.load("/app/js/models/json-objects/tree-1-fixed-3.json", (obj) => {
+        this.loader.load(treeModel, (obj) => {
             for (var i = 0; i < 50; i++) {
                 var size = getRandomArbitrary(.3, .6);
                 var temp = obj.clone();
@@ -227,7 +244,7 @@ export default class PortFloor {
 
 
         //trucks
-        this.loader.load("/app/js/models/truck/delivery-truck.json", (obj) => {
+        this.loader.load(truckModel, (obj) => {
             var x = -13;
             var y = 0;
             var z = 0;
@@ -251,17 +268,17 @@ export default class PortFloor {
     }
 
     placeWarehouse(){
-        const siding = new TextureLoader().load("Images/blankSide.jpg");
+        const siding = new TextureLoader().load(warehouseTex);
         siding.wrapS = RepeatWrapping;
         siding.wrapT = RepeatWrapping;
         siding.repeat.x = 4;
         siding.repeat.y = 1;
-        const loadingBay = new TextureLoader().load("Images/loadingBay.jpg");
+        const loadingBay = new TextureLoader().load(warehouseTex1);
         loadingBay.wrapS = RepeatWrapping;
         loadingBay.wrapT = RepeatWrapping;
         loadingBay.repeat.x = 4;
         loadingBay.repeat.y = 1;
-        const roof = new TextureLoader().load("Images/gravelRoof.jpg");
+        const roof = new TextureLoader().load(roofTex);
         roof.wrapS = RepeatWrapping;
         roof.wrapT = RepeatWrapping;
         roof.repeat.x = 30;
@@ -287,7 +304,7 @@ export default class PortFloor {
     placeContainers(){
 
         //cargo containers1
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -308,7 +325,7 @@ export default class PortFloor {
             });
 
         //cargo containers2
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -328,7 +345,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers3
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -349,7 +366,7 @@ export default class PortFloor {
             });
 
         //cargo containers4
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -369,7 +386,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers5
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -390,7 +407,7 @@ export default class PortFloor {
             });
 
         //cargo containers6
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -410,7 +427,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers7
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -432,7 +449,7 @@ export default class PortFloor {
             });
 
         //cargo containers8
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -452,7 +469,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers9
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -473,7 +490,7 @@ export default class PortFloor {
             });
 
         //cargo containers10
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -493,7 +510,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers11
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -514,7 +531,7 @@ export default class PortFloor {
             });
 
         //cargo containers12
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -534,7 +551,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers13
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -555,7 +572,7 @@ export default class PortFloor {
             });
 
         //cargo containers14
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -575,7 +592,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers15
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -596,7 +613,7 @@ export default class PortFloor {
             });
 
         //cargo containers16
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -616,7 +633,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers17
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -637,7 +654,7 @@ export default class PortFloor {
             });
 
         //cargo containers18
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -80;
                 var y = 0;
@@ -657,7 +674,7 @@ export default class PortFloor {
                 }
             });
         //cargo containers19
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = -120;
                 var y = 0;
@@ -678,7 +695,7 @@ export default class PortFloor {
             });
 
         //cargo containers20
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = -120;
                 var y = 0;

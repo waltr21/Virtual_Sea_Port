@@ -1,5 +1,9 @@
 import { TextureLoader, PlaneGeometry, BoxGeometry, CylinderGeometry, DoubleSide, MeshPhongMaterial, MeshBasicMaterial, Mesh, Group, Math, RepeatWrapping} from 'three';
 import * as THREE from "three";
+import craneModel from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/cargo.json";
+import metal from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/red_metal2.jpg";
+import windows from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/windows2.png";
+
 
 export default class Crane extends Group {
     constructor () { 
@@ -8,8 +12,8 @@ export default class Crane extends Group {
         this.moveableCraneGroup = new Group();
         this.containerGroup = new Group();
 
-        const red_metalTex = new TextureLoader().load("Images/red_metal2.jpg");
-        const windowsTex = new TextureLoader().load("Images/windows2.png");
+        const red_metalTex = new TextureLoader().load(metal);
+        const windowsTex = new TextureLoader().load(windows);
 
         let baseGeo = new CylinderGeometry(4, 4, 30, 4);
         let legGeo = new CylinderGeometry(3, 3, 20, 4);
@@ -124,7 +128,7 @@ export default class Crane extends Group {
         this.loader = new THREE.ObjectLoader();
 
        
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(craneModel,
             (obj) => {
                 obj.scale.set(.85, .77, .77);
                 obj.translateY(28);

@@ -3,6 +3,11 @@ import {DoubleSide} from "three";
 import {RepeatWrapping} from "three";
 import {TextureLoader} from "three";
 import {MeshBasicMaterial} from "three";
+import hullTexImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/hullMetal.jpg";
+import metalTexImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/rustyMetal.jpg";
+import windowImage from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/Images/windows.png";
+import cargoModel from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/cargo.json";
+import cargo1Model from "/home/sam/Documents/school/cis367/Virtual_Sea_Port/threejs-starter/app/js/models/json-objects/cargo1.json";
 
 
 export default class CargoShip {
@@ -11,7 +16,7 @@ export default class CargoShip {
         this.shipGroup = new THREE.Group();
 
         //Boat hull
-        const hullTex = new TextureLoader().load("Images/hullMetal.jpg");
+        const hullTex = new TextureLoader().load(hullTexImage);
         hullTex.wrapS = RepeatWrapping;
         hullTex.wrapT = RepeatWrapping;
         hullTex.repeat.x = 2;
@@ -25,7 +30,7 @@ export default class CargoShip {
         this.shipGroup.add(hull);
 
         //ship floor
-        const metalTex = new TextureLoader().load("Images/rustyMetal.jpg");
+        const metalTex = new TextureLoader().load(metalTexImage);
         metalTex.wrapS = RepeatWrapping;
         metalTex.wrapT = RepeatWrapping;
         metalTex.repeat.x = 10;
@@ -38,7 +43,7 @@ export default class CargoShip {
         this.shipGroup.add(floor);
 
         //bow
-        const hullTex1 = new TextureLoader().load("Images/hullMetal.jpg");
+        const hullTex1 = new TextureLoader().load(hullTexImage);
         hullTex1.wrapS = RepeatWrapping;
         hullTex1.wrapT = RepeatWrapping;
         hullTex1.repeat.x = 2;
@@ -52,7 +57,7 @@ export default class CargoShip {
         this.shipGroup.add(bow);
 
         //bow floor
-        const metalTex1 = new TextureLoader().load("Images/rustyMetal.jpg");
+        const metalTex1 = new TextureLoader().load(metalTexImage);
         metalTex1.wrapS = RepeatWrapping;
         metalTex1.wrapT = RepeatWrapping;
         metalTex1.repeat.x = 10;
@@ -79,7 +84,7 @@ export default class CargoShip {
         this.shipGroup.add(tower);
 
         //command tower1
-        const windowsTex = new TextureLoader().load("Images/windows.png");
+        const windowsTex = new TextureLoader().load(windowImage);
         windowsTex.wrapS = RepeatWrapping;
         windowsTex.wrapT = RepeatWrapping;
         windowsTex.repeat.x = 1;
@@ -108,7 +113,7 @@ export default class CargoShip {
 
     placeContainers(){
         //cargo containers1
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = 0;
                 var y = 10;
@@ -130,7 +135,7 @@ export default class CargoShip {
             });
 
         //cargo containers2
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = 0;
                 var y = 10;
@@ -152,7 +157,7 @@ export default class CargoShip {
                 }
             });
         //cargo containers3
-        this.loader.load("/app/js/models/json-objects/cargo.json",
+        this.loader.load(cargoModel,
             (obj) => {
                 var x = 0;
                 var y = 10;
@@ -174,7 +179,7 @@ export default class CargoShip {
             });
 
         //cargo containers4
-        this.loader.load("/app/js/models/json-objects/cargo1.json",
+        this.loader.load(cargo1Model,
             (obj) => {
                 var x = 0;
                 var y = 10;
