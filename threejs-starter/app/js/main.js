@@ -13,9 +13,10 @@ import Plane from "./models/Plane";
 import Sun from "./models/Sun";
 import CargoShip from "./models/CargoShip";
 
-var display, camControl, dolly;
+var display, camControl, camControl1, dolly, dolly1;
 var isWalking = false;
-var inVR;
+var inVR = false;
+var HMD = true;
 
 
 export default class App {
@@ -41,16 +42,13 @@ export default class App {
         this.camera = new THREE.PerspectiveCamera(75, 4/3, 0.5, 1000);
         this.camera.position.z = 100;
 
-        //Position for non VR
-        //height of average human 5.6ft standing atop the platform 10ft above water level
-        //this.camera.position.set(0, 0, 0);
+        // const c1 = document.getElementById('mycanvas1');
+        // // Enable antialias for smoother lines
+        // this.renderer1 = new THREE.WebGLRenderer({canvas: c1, antialias: true});
+        // this.camera1 = new THREE.PerspectiveCamera(75, 4/3, 0.5, 1000);
+        // this.camera1.position.z = 100;
 
-        //this allows the camera to be set to an initial spot
-        // this.dolly.position.set( 240, 15.6, 10 );
-        dolly = new THREE.Group();
-        dolly.add( this.camera);
-        dolly.matrixAutoUpdate = false;
-        this.scene.add( dolly );
+
 
 
         // const orbiter = new OrbitControls(this.camera);
@@ -76,12 +74,44 @@ export default class App {
         const polyfill = new WebVRPolyfill();
         navigator.getVRDisplays().then(displays => {
             if (displays.length > 0) {
+
+                inVR = true;
+
+                const c1 = document.getElementById('mycanvas1');
+                // Enable antialias for smoother lines
+                this.renderer1 = new THREE.WebGLRenderer({canvas: c1, antialias: true});
+                this.camera1 = new THREE.PerspectiveCamera(75, 4/3, 0.5, 1000);
+                //this.camera1.position.z = 100;
+
+
+                //this allows the camera to be set to an initial spot
+                // this.dolly.position.set( 240, 15.6, 10 );
+                dolly = new THREE.Group();
+                dolly.add( this.camera);
+                dolly.matrixAutoUpdate = false;
+                this.scene.add( dolly );
+
+                dolly1 = new THREE.Group();
+                dolly1.add( this.camera1);
+                dolly1.matrixAutoUpdate = false;
+                this.scene.add( dolly1 );
+
+
+                window.addEventListener('resize', () => this.resizeHandlerHMD());
+                this.resizeHandlerHMD();
+                requestAnimationFrame(() => this.render());
+
                 // WebVR is supported
                 display = displays[0];
                 camControl = new VRControls(this.camera);
+                camControl1 = new VRControls(this.camera1);
 
-                var trans = new THREE.Matrix4().makeTranslation(240, 15.6, 10);
-                dolly.matrix.multiply(trans);
+                //left
+                var transLeft = new THREE.Matrix4().makeTranslation(240, 15.6, 10);
+                //right
+                var transRight = new THREE.Matrix4().makeTranslation(241, 15.6, 10);
+                dolly.matrix.multiply(transLeft);
+                dolly1.matrix.multiply(transRight);
 
             } else {
                 // WebVR is NOT supported, fallback to trackball control
@@ -91,6 +121,17 @@ export default class App {
                 this.tracker.noZoom = false;
                 this.tracker.noPan = false;
                 camControl = this.tracker;
+
+                //this allows the camera to be set to an initial spot
+                // this.dolly.position.set( 240, 15.6, 10 );
+                dolly = new THREE.Group();
+                dolly.add( this.camera);
+                dolly.matrixAutoUpdate = false;
+                this.scene.add( dolly );
+
+                window.addEventListener('resize', () => this.resizeHandler());
+                this.resizeHandler();
+                requestAnimationFrame(() => this.render());
             }
             //display.requestAnimationFrame(this.render);
         });
@@ -152,9 +193,7 @@ export default class App {
         this.cargoShip.matrix.multiply(transShip);
         this.scene.add(this.cargoShip);
 
-        window.addEventListener('resize', () => this.resizeHandler());
-        this.resizeHandler();
-        requestAnimationFrame(() => this.render());
+
 
         //Use Mumble library for voice commands
         var Mumble = require('mumble-js');
@@ -205,16 +244,44 @@ export default class App {
         // start listening
         mumble.start();
 
+        document.getElementById("checkbox").addEventListener("click", event => {
+            console.log("clicked");
+            if (document.getElementById("checkbox").checked === true){
+                console.log("true");
+                HMD = true;
+
+                document.getElementById("mycanvas1").style.display="block";
+
+                this.resizeHandlerHMD();
+                requestAnimationFrame(() => this.render());
+
+            }else{
+                console.log("false");
+                HMD = false;
+
+                document.getElementById("mycanvas1").style.display="none";
+
+                this.resizeHandlerHMD();
+                requestAnimationFrame(() => this.render());
+
+            }
+            document.getElementById("checkbox").blur();
+        });
 
 
     }
 
 
 
-
     render() {
         this.renderer.render(this.scene, this.camera);
         camControl.update();
+
+        if(inVR && HMD){
+            this.renderer1.render(this.scene, this.camera1);
+            camControl1.update();
+        }
+
 
 
 
@@ -229,14 +296,20 @@ export default class App {
 
             var transBody = new THREE.Matrix4().makeTranslation(0, 0, -.1);
             dolly.matrix.multiply(transBody);
+            dolly1.matrix.multiply(transBody);
+
 
             //head bob
             if(this.counterWalk < 25 && this.counterWalk % 2 === 0){
                 var transUp = new THREE.Matrix4().makeTranslation(0, .02, 0);
                 dolly.matrix.multiply(transUp);
+                dolly1.matrix.multiply(transUp);
+
             }else if (this.counterWalk > 25 && this.counterWalk < 50 && this.counterWalk % 2 === 0){
                 var transDown = new THREE.Matrix4().makeTranslation(0, -.02, 0);
                 dolly.matrix.multiply(transDown);
+                dolly1.matrix.multiply(transDown);
+
             }
             if(this.counterWalk === 51){
                 this.counterWalk = 0;
@@ -363,10 +436,60 @@ export default class App {
 
     }
 
+    resizeHandlerHMD() {
+
+
+        if(HMD) {
+            const canvas = document.getElementById("mycanvas");
+            let w = window.innerWidth - 16;
+            let h = 0.75 * w;
+            /* maintain 4:3 ratio */
+            if (canvas.offsetTop + h > window.innerHeight) {
+                h = window.innerHeight - canvas.offsetTop - 150;
+                w = 4 / 3 * h;
+            }
+            canvas.width = w;
+            canvas.height = h;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(w, h);
+
+
+            //second canvas
+            const canvas1 = document.getElementById("mycanvas1");
+            let w1 = window.innerWidth - 16;
+            let h1 = 0.75 * w1;
+            /* maintain 4:3 ratio */
+            if (canvas1.offsetTop + h1 > window.innerHeight) {
+                h1 = window.innerHeight - canvas1.offsetTop - 150;
+                w1 = 4 / 3 * h1;
+            }
+            canvas1.width = w1;
+            canvas1.height = h1;
+            this.camera1.updateProjectionMatrix();
+            this.renderer1.setSize(w1, h1);
+        } else {
+            const canvas = document.getElementById("mycanvas");
+            let w = window.innerWidth - 16;
+            let h = 0.75 * w;
+            /* maintain 4:3 ratio */
+            if (canvas.offsetTop + h > window.innerHeight) {
+                h = window.innerHeight - canvas.offsetTop - 16;
+                w = 4/3 * h;
+            }
+            canvas.width = w;
+            canvas.height = h;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(w, h);
+        }
+
+
+        //this.tracker.handleResize();
+    }
     resizeHandler() {
         const canvas = document.getElementById("mycanvas");
         let w = window.innerWidth - 16;
-        let h = 0.75 * w;  /* maintain 4:3 ratio */
+        let h = 0.75 * w;
+        /* maintain 4:3 ratio */
         if (canvas.offsetTop + h > window.innerHeight) {
             h = window.innerHeight - canvas.offsetTop - 16;
             w = 4/3 * h;
@@ -375,15 +498,16 @@ export default class App {
         canvas.height = h;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(w, h);
-        //this.tracker.handleResize();
     }
-    
+
+
 }
 
 
 function turnBodyLeft(){
     var rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(90));
     dolly.matrix.multiply(rotY);
+    dolly1.matrix.multiply(rotY);
 
 
 }
@@ -391,6 +515,7 @@ function turnBodyLeft(){
 function turnBodyRight(){
     var rotY = new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(-90));
     dolly.matrix.multiply(rotY);
+    dolly1.matrix.multiply(rotY);
 
 
 }

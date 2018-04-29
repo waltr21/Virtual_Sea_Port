@@ -46404,9 +46404,10 @@ document.addEventListener('DOMContentLoaded', new __WEBPACK_IMPORTED_MODULE_0__m
 
 
 
-var display, camControl, dolly;
+var display, camControl, camControl1, dolly, dolly1;
 var isWalking = false;
-var inVR;
+var inVR = false;
+var HMD = true;
 
 class App {
     constructor() {
@@ -46429,16 +46430,12 @@ class App {
         this.camera = new __WEBPACK_IMPORTED_MODULE_0_three__["PerspectiveCamera"](75, 4 / 3, 0.5, 1000);
         this.camera.position.z = 100;
 
-        //Position for non VR
-        //height of average human 5.6ft standing atop the platform 10ft above water level
-        //this.camera.position.set(0, 0, 0);
+        // const c1 = document.getElementById('mycanvas1');
+        // // Enable antialias for smoother lines
+        // this.renderer1 = new THREE.WebGLRenderer({canvas: c1, antialias: true});
+        // this.camera1 = new THREE.PerspectiveCamera(75, 4/3, 0.5, 1000);
+        // this.camera1.position.z = 100;
 
-        //this allows the camera to be set to an initial spot
-        // this.dolly.position.set( 240, 15.6, 10 );
-        dolly = new __WEBPACK_IMPORTED_MODULE_0_three__["Group"]();
-        dolly.add(this.camera);
-        dolly.matrixAutoUpdate = false;
-        this.scene.add(dolly);
 
         // const orbiter = new OrbitControls(this.camera);
         // orbiter.enableZoom = false;
@@ -46461,12 +46458,43 @@ class App {
         const polyfill = new __WEBPACK_IMPORTED_MODULE_2_webvr_polyfill___default.a();
         navigator.getVRDisplays().then(displays => {
             if (displays.length > 0) {
+
+                inVR = true;
+
+                const c1 = document.getElementById('mycanvas1');
+                // Enable antialias for smoother lines
+                this.renderer1 = new __WEBPACK_IMPORTED_MODULE_0_three__["WebGLRenderer"]({ canvas: c1, antialias: true });
+                this.camera1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PerspectiveCamera"](75, 4 / 3, 0.5, 1000);
+                //this.camera1.position.z = 100;
+
+
+                //this allows the camera to be set to an initial spot
+                // this.dolly.position.set( 240, 15.6, 10 );
+                dolly = new __WEBPACK_IMPORTED_MODULE_0_three__["Group"]();
+                dolly.add(this.camera);
+                dolly.matrixAutoUpdate = false;
+                this.scene.add(dolly);
+
+                dolly1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Group"]();
+                dolly1.add(this.camera1);
+                dolly1.matrixAutoUpdate = false;
+                this.scene.add(dolly1);
+
+                window.addEventListener('resize', () => this.resizeHandlerHMD());
+                this.resizeHandlerHMD();
+                requestAnimationFrame(() => this.render());
+
                 // WebVR is supported
                 display = displays[0];
                 camControl = new __WEBPACK_IMPORTED_MODULE_1_three_vrcontrols_module___default.a(this.camera);
+                camControl1 = new __WEBPACK_IMPORTED_MODULE_1_three_vrcontrols_module___default.a(this.camera1);
 
-                var trans = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeTranslation(240, 15.6, 10);
-                dolly.matrix.multiply(trans);
+                //left
+                var transLeft = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeTranslation(240, 15.6, 10);
+                //right
+                var transRight = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeTranslation(241, 15.6, 10);
+                dolly.matrix.multiply(transLeft);
+                dolly1.matrix.multiply(transRight);
             } else {
                 // WebVR is NOT supported, fallback to trackball control
                 display = window;
@@ -46475,6 +46503,17 @@ class App {
                 this.tracker.noZoom = false;
                 this.tracker.noPan = false;
                 camControl = this.tracker;
+
+                //this allows the camera to be set to an initial spot
+                // this.dolly.position.set( 240, 15.6, 10 );
+                dolly = new __WEBPACK_IMPORTED_MODULE_0_three__["Group"]();
+                dolly.add(this.camera);
+                dolly.matrixAutoUpdate = false;
+                this.scene.add(dolly);
+
+                window.addEventListener('resize', () => this.resizeHandler());
+                this.resizeHandler();
+                requestAnimationFrame(() => this.render());
             }
             //display.requestAnimationFrame(this.render);
         });
@@ -46533,10 +46572,6 @@ class App {
         this.cargoShip.matrix.multiply(transShip);
         this.scene.add(this.cargoShip);
 
-        window.addEventListener('resize', () => this.resizeHandler());
-        this.resizeHandler();
-        requestAnimationFrame(() => this.render());
-
         //Use Mumble library for voice commands
         var Mumble = __webpack_require__(46);
 
@@ -46584,11 +46619,38 @@ class App {
 
         // start listening
         mumble.start();
+
+        document.getElementById("checkbox").addEventListener("click", event => {
+            console.log("clicked");
+            if (document.getElementById("checkbox").checked === true) {
+                console.log("true");
+                HMD = true;
+
+                document.getElementById("mycanvas1").style.display = "block";
+
+                this.resizeHandlerHMD();
+                requestAnimationFrame(() => this.render());
+            } else {
+                console.log("false");
+                HMD = false;
+
+                document.getElementById("mycanvas1").style.display = "none";
+
+                this.resizeHandlerHMD();
+                requestAnimationFrame(() => this.render());
+            }
+            document.getElementById("checkbox").blur();
+        });
     }
 
     render() {
         this.renderer.render(this.scene, this.camera);
         camControl.update();
+
+        if (inVR && HMD) {
+            this.renderer1.render(this.scene, this.camera1);
+            camControl1.update();
+        }
 
         let trans = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeTranslation(-0.1, 0, 0);
         let rotY = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeRotationY(__WEBPACK_IMPORTED_MODULE_0_three__["Math"].degToRad(0.1));
@@ -46600,14 +46662,17 @@ class App {
 
             var transBody = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeTranslation(0, 0, -.1);
             dolly.matrix.multiply(transBody);
+            dolly1.matrix.multiply(transBody);
 
             //head bob
             if (this.counterWalk < 25 && this.counterWalk % 2 === 0) {
                 var transUp = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeTranslation(0, .02, 0);
                 dolly.matrix.multiply(transUp);
+                dolly1.matrix.multiply(transUp);
             } else if (this.counterWalk > 25 && this.counterWalk < 50 && this.counterWalk % 2 === 0) {
                 var transDown = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeTranslation(0, -.02, 0);
                 dolly.matrix.multiply(transDown);
+                dolly1.matrix.multiply(transDown);
             }
             if (this.counterWalk === 51) {
                 this.counterWalk = 0;
@@ -46714,10 +46779,57 @@ class App {
         requestAnimationFrame(() => this.render());
     }
 
+    resizeHandlerHMD() {
+
+        if (HMD) {
+            const canvas = document.getElementById("mycanvas");
+            let w = window.innerWidth - 16;
+            let h = 0.75 * w;
+            /* maintain 4:3 ratio */
+            if (canvas.offsetTop + h > window.innerHeight) {
+                h = window.innerHeight - canvas.offsetTop - 150;
+                w = 4 / 3 * h;
+            }
+            canvas.width = w;
+            canvas.height = h;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(w, h);
+
+            //second canvas
+            const canvas1 = document.getElementById("mycanvas1");
+            let w1 = window.innerWidth - 16;
+            let h1 = 0.75 * w1;
+            /* maintain 4:3 ratio */
+            if (canvas1.offsetTop + h1 > window.innerHeight) {
+                h1 = window.innerHeight - canvas1.offsetTop - 150;
+                w1 = 4 / 3 * h1;
+            }
+            canvas1.width = w1;
+            canvas1.height = h1;
+            this.camera1.updateProjectionMatrix();
+            this.renderer1.setSize(w1, h1);
+        } else {
+            const canvas = document.getElementById("mycanvas");
+            let w = window.innerWidth - 16;
+            let h = 0.75 * w;
+            /* maintain 4:3 ratio */
+            if (canvas.offsetTop + h > window.innerHeight) {
+                h = window.innerHeight - canvas.offsetTop - 16;
+                w = 4 / 3 * h;
+            }
+            canvas.width = w;
+            canvas.height = h;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(w, h);
+        }
+
+        //this.tracker.handleResize();
+    }
     resizeHandler() {
         const canvas = document.getElementById("mycanvas");
         let w = window.innerWidth - 16;
-        let h = 0.75 * w; /* maintain 4:3 ratio */
+        let h = 0.75 * w;
+        /* maintain 4:3 ratio */
         if (canvas.offsetTop + h > window.innerHeight) {
             h = window.innerHeight - canvas.offsetTop - 16;
             w = 4 / 3 * h;
@@ -46726,7 +46838,6 @@ class App {
         canvas.height = h;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(w, h);
-        //this.tracker.handleResize();
     }
 
 }
@@ -46736,11 +46847,13 @@ class App {
 function turnBodyLeft() {
     var rotY = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeRotationY(__WEBPACK_IMPORTED_MODULE_0_three__["Math"].degToRad(90));
     dolly.matrix.multiply(rotY);
+    dolly1.matrix.multiply(rotY);
 }
 
 function turnBodyRight() {
     var rotY = new __WEBPACK_IMPORTED_MODULE_0_three__["Matrix4"]().makeRotationY(__WEBPACK_IMPORTED_MODULE_0_three__["Math"].degToRad(-90));
     dolly.matrix.multiply(rotY);
+    dolly1.matrix.multiply(rotY);
 }
 
 /***/ }),
