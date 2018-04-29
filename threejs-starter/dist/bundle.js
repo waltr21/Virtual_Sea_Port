@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -46355,28 +46355,34 @@ module.exports = __webpack_require__.p + "4a503851e160064a4bd790bf3a21a1a6.json"
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__main__ = __webpack_require__(3);
-
-document.addEventListener('DOMContentLoaded', new __WEBPACK_IMPORTED_MODULE_0__main__["a" /* default */]());
+module.exports = __webpack_require__.p + "058063fb13cb8df348299928f23bed63.json";
 
 /***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__main__ = __webpack_require__(4);
+
+document.addEventListener('DOMContentLoaded', new __WEBPACK_IMPORTED_MODULE_0__main__["a" /* default */]());
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_three_vrcontrols_module__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_three_vrcontrols_module__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_three_vrcontrols_module___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_three_vrcontrols_module__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_webvr_polyfill__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_webvr_polyfill__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_webvr_polyfill___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_webvr_polyfill__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_three_trackballcontrols__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_three_trackballcontrols__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_three_trackballcontrols___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_three_trackballcontrols__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Floor_js__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_PortFloor__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Floor_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_PortFloor__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_Crane__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_Skybox__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__models_FishBoat__ = __webpack_require__(32);
@@ -46532,7 +46538,7 @@ class App {
         requestAnimationFrame(() => this.render());
 
         //Use Mumble library for voice commands
-        var Mumble = __webpack_require__(42);
+        var Mumble = __webpack_require__(41);
 
         var mumble = new Mumble({
             language: 'en-US',
@@ -46743,7 +46749,7 @@ function turnBodyRight() {
 }
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46755,7 +46761,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _three = __webpack_require__(5);
+var _three = __webpack_require__(6);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -46876,7 +46882,7 @@ exports.default = VRControls;
 ;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -91114,7 +91120,7 @@ function CanvasRenderer() {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -94615,10 +94621,10 @@ return src;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 var g;
@@ -94645,7 +94651,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -95307,12 +95313,12 @@ TrackballControls.prototype = Object.create( THREE.EventDispatcher.prototype );
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_tex_Water_jpg__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_tex_Water_jpg__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_tex_Water_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_tex_Water_jpg__);
 
 
@@ -95337,41 +95343,43 @@ class Floor {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "1f74597ead78cb4c3ff4490df19b82c4.jpg";
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_grass_jpg__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_grass_jpg__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_grass_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_grass_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_metal_jpg__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_metal_jpg__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_metal_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_metal_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_road_jpg__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_road_jpg__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_road_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_road_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_turn_jpg__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_turn_jpg__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_turn_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_turn_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_asphalt_jpg__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_asphalt_jpg__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_asphalt_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_asphalt_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_runway_jpg__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_runway_jpg__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_runway_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_runway_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_runway1_jpg__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_runway1_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_runway1_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection3_jpg__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection3_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection3_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection4_jpg__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection4_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection4_jpg__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_tree_json__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_tree_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_tree_json__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_truck_delivery_truck_json__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_truck_delivery_truck_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_truck_delivery_truck_json__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection3_jpg__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection3_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection3_jpg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection4_jpg__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection4_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection4_jpg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_tree_json__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_tree_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_tree_json__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_truck_delivery_truck_json__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_truck_delivery_truck_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_truck_delivery_truck_json__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json__);
 
 
 //import * as THREE from 'three';
@@ -95465,7 +95473,7 @@ class PortFloor {
         this.floorGroup.add(roadh1);
 
         //road vertical
-        const upDownRoad = new __WEBPACK_IMPORTED_MODULE_0_three__["TextureLoader"]().load(__WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg___default.a);
+        const upDownRoad = new __WEBPACK_IMPORTED_MODULE_0_three__["TextureLoader"]().load(__WEBPACK_IMPORTED_MODULE_7__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg___default.a);
         upDownRoad.wrapS = __WEBPACK_IMPORTED_MODULE_0_three__["RepeatWrapping"];
         upDownRoad.wrapT = __WEBPACK_IMPORTED_MODULE_0_three__["RepeatWrapping"];
         upDownRoad.repeat.x = 1;
@@ -95481,7 +95489,7 @@ class PortFloor {
         this.floorGroup.add(road1);
 
         //road vertical1
-        const upDownRoad1 = new __WEBPACK_IMPORTED_MODULE_0_three__["TextureLoader"]().load(__WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg___default.a);
+        const upDownRoad1 = new __WEBPACK_IMPORTED_MODULE_0_three__["TextureLoader"]().load(__WEBPACK_IMPORTED_MODULE_7__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_roadv_jpg___default.a);
         upDownRoad1.wrapS = __WEBPACK_IMPORTED_MODULE_0_three__["RepeatWrapping"];
         upDownRoad1.wrapT = __WEBPACK_IMPORTED_MODULE_0_three__["RepeatWrapping"];
         upDownRoad1.repeat.x = 1;
@@ -95497,7 +95505,7 @@ class PortFloor {
         this.floorGroup.add(road2);
 
         //road intersection
-        const roadB = new __WEBPACK_IMPORTED_MODULE_0_three__["TextureLoader"]().load(__WEBPACK_IMPORTED_MODULE_9__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection3_jpg___default.a);
+        const roadB = new __WEBPACK_IMPORTED_MODULE_0_three__["TextureLoader"]().load(__WEBPACK_IMPORTED_MODULE_8__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_intersection3_jpg___default.a);
         let geometry4 = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20, 20);
         let material4 = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshPhongMaterial"]({ map: roadB, side: __WEBPACK_IMPORTED_MODULE_0_three__["DoubleSide"], shininess: 0 });
         let roadBlank = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](geometry4, material4);
@@ -95587,7 +95595,7 @@ class PortFloor {
         this.loader = new __WEBPACK_IMPORTED_MODULE_0_three__["ObjectLoader"]();
 
         //trees
-        this.loader.load(__WEBPACK_IMPORTED_MODULE_11__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_tree_json___default.a, obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_10__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_tree_json___default.a, obj => {
             for (var i = 0; i < 50; i++) {
                 var size = getRandomArbitrary(.3, .6);
                 var temp = obj.clone();
@@ -95607,7 +95615,7 @@ class PortFloor {
         });
 
         //trucks
-        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_truck_delivery_truck_json___default.a, obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_11__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_truck_delivery_truck_json___default.a, obj => {
             var x = -13;
             var y = 0;
             var z = 0;
@@ -95656,7 +95664,7 @@ class PortFloor {
     placeContainers() {
 
         //cargo containers1
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -80;
@@ -95676,7 +95684,7 @@ class PortFloor {
         });
 
         //cargo containers2
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -80;
@@ -95695,7 +95703,7 @@ class PortFloor {
             }
         });
         //cargo containers3
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -80;
@@ -95715,7 +95723,7 @@ class PortFloor {
         });
 
         //cargo containers4
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -80;
@@ -95734,7 +95742,7 @@ class PortFloor {
             }
         });
         //cargo containers5
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -72;
@@ -95754,7 +95762,7 @@ class PortFloor {
         });
 
         //cargo containers6
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -72;
@@ -95773,7 +95781,7 @@ class PortFloor {
             }
         });
         //cargo containers7
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -72;
@@ -95794,7 +95802,7 @@ class PortFloor {
         });
 
         //cargo containers8
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -72;
@@ -95813,7 +95821,7 @@ class PortFloor {
             }
         });
         //cargo containers9
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -64;
@@ -95833,7 +95841,7 @@ class PortFloor {
         });
 
         //cargo containers10
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -64;
@@ -95852,7 +95860,7 @@ class PortFloor {
             }
         });
         //cargo containers11
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -64;
@@ -95872,7 +95880,7 @@ class PortFloor {
         });
 
         //cargo containers12
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -64;
@@ -95891,7 +95899,7 @@ class PortFloor {
             }
         });
         //cargo containers13
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -56;
@@ -95911,7 +95919,7 @@ class PortFloor {
         });
 
         //cargo containers14
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -56;
@@ -95930,7 +95938,7 @@ class PortFloor {
             }
         });
         //cargo containers15
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -56;
@@ -95950,7 +95958,7 @@ class PortFloor {
         });
 
         //cargo containers16
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -56;
@@ -95969,7 +95977,7 @@ class PortFloor {
             }
         });
         //cargo containers17
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -48;
@@ -95989,7 +95997,7 @@ class PortFloor {
         });
 
         //cargo containers18
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -80;
             var y = 0;
             var z = -48;
@@ -96008,7 +96016,7 @@ class PortFloor {
             }
         });
         //cargo containers19
-        this.loader.load("/app/js/models/json-objects/cargo.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_12__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -48;
@@ -96028,7 +96036,7 @@ class PortFloor {
         });
 
         //cargo containers20
-        this.loader.load("/app/js/models/json-objects/cargo1.json", obj => {
+        this.loader.load(__WEBPACK_IMPORTED_MODULE_13__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default.a, obj => {
             var x = -120;
             var y = 0;
             var z = -48;
@@ -96062,46 +96070,40 @@ function getRandomArbitrary(min, max) {
 }
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "94e39d7d80232d38c8ca9d3f05cb896b.jpg";
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "9fb7dda49f96e329157c14f0947f0cff.jpg";
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "b30159ea516b30dfb003eeba88ddf752.jpg";
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "c841c03a7a8d6491a34b7e1b2c3a5cb4.jpg";
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "7960fb3108f8317a96e5c3e6e51438b0.jpg";
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "0edea6d88d6c7c50f2a3da4f8512ed26.jpg";
-
-/***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "061671a8e7a45a2566038a72a4f21d68.jpg";
+module.exports = __webpack_require__.p + "0edea6d88d6c7c50f2a3da4f8512ed26.jpg";
 
 /***/ }),
 /* 19 */
@@ -96511,7 +96513,7 @@ class Sun extends __WEBPACK_IMPORTED_MODULE_0_three__["Group"] {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_windows_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_Images_windows_png__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo_json__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Users_ryanwalt_Downloads_CODE_WebstormProjects_Virtual_Sea_Port_threejs_starter_app_js_models_json_objects_cargo1_json__);
 
 
@@ -96724,12 +96726,6 @@ module.exports = __webpack_require__.p + "80a71b1eeabd5630959f1239c3ec3d52.png";
 
 /***/ }),
 /* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "058063fb13cb8df348299928f23bed63.json";
-
-/***/ }),
-/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!*
